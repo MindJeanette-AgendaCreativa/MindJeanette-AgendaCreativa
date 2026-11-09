@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>JSP Seguros · Jeanette Salinas Ponce | Corredora Oficial de Seguros CMF</title>
+  
+  <meta name="description" content="Asesoría fiduciaria e independiente en seguros para familias, empresas y viajeros de todo el mundo. Emisión express de SOAPEX para ingresar a Chile y RCI Mercosur." />
+  <meta name="keywords" content="JSP Seguros, Jeanette Salinas Ponce, Corredora de Seguros Chile, SOAPEX Chile, RCI Mercosur, Seguros de Viaje, CMF Chile, Seguros de Salud y Vida" />
+  <meta name="theme-color" content="#FAF8F5" />
+  
+  <!-- Open Graph / Redes Sociales -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="JSP Seguros · Jeanette Salinas Ponce | Corredora Oficial de Seguros" />
+  <meta property="og:description" content="Tu tranquilidad asegurada. Yo gestiono por ti. Asesoría fiduciaria para personas, pymes y viajeros internacionales." />
+  <meta property="og:image" content="brand-icon.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="apple-touch-icon" href="brand-icon.png" />
+
+  <!-- Tipografías Google Fonts: Plus Jakarta Sans (UI moderna estilo Alan) + Newsreader (Editorial cálido fiduciario) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Hoja de estilos JSP Seguros -->
+  <link rel="stylesheet" href="jsp-styles.css?v=1.0" />
+</head>
+<body>
+
+  <!-- ======================================================================
+       HEADER / BARRA DE NAVEGACIÓN
+       ====================================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="brand-wrapper" aria-label="JSP Seguros Inicio">
+        <img src="brand-icon.png" alt="Logo JSP Seguros" class="brand-avatar" onerror="this.style.display='none'" />
+        <div>
+          <div class="brand-title">
+            JSP Seguros
+            <span class="brand-badge">CMF Chile</span>
+          </div>
+          <div class="brand-subtitle" data-i18n="brand_sub">Corredora Oficial · Jeanette Salinas Ponce</div>
+        </div>
+      </a>
+
+      <!-- Enlaces de navegación -->
+      <nav aria-label="Navegación principal">
+        <ul class="nav-links">
+          <li><a href="#servicios" class="nav-link" data-i18n="nav_services">Seguros</a></li>
+          <li><a href="#viajeros" class="nav-link" data-i18n="nav_travelers">Viajeros & SOAPEX</a></li>
+          <li><a href="#metodo" class="nav-link" data-i18n="nav_method">Cómo te ayudo</a></li>
+          <li><a href="#alianzas" class="nav-link" data-i18n="nav_alliances">Alianzas B2B</a></li>
+        </ul>
+      </nav>
+
+      <!-- Acciones: Selector de Idioma (ES / EN) y Botón Asesoría -->
+      <div class="nav-actions">
+        <div class="lang-switcher" aria-label="Cambiar idioma">
+          <button id="lang-es" class="lang-btn active" aria-label="Español">ES</button>
+          <button id="lang-en" class="lang-btn" aria-label="English">EN</button>
+        </div>
+
+        <button class="btn btn-primary btn-sm" data-open-modal data-subject="Asesoría General" data-i18n="nav_cta">
+          Asesoría Gratuita
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       HERO SECTION (Alan + Luko Style)
+       ====================================================================== -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        
+        <!-- Columna Izquierda: Mensaje Fiduciario y CTAs -->
+        <div class="hero-content">
+          <div class="hero-badge-tag">
+            <span class="hero-badge-dot"></span>
+            <span data-i18n="hero_tag">Corredora Oficial de Seguros · Jeanette Salinas Ponce</span>
+          </div>
+
+          <h1 class="hero-title" data-i18n="hero_title">
+            Tu tranquilidad asegurada. <br>
+            <span class="highlight">Yo gestiono por ti.</span>
+          </h1>
+
+          <p class="hero-description" data-i18n="hero_desc">
+            Asesoría fiduciaria e independiente para personas, familias, empresas y viajeros de todo el mundo. Evaluamos tus coberturas, encontramos la mejor opción del mercado y te defendemos en caso de siniestro.
+          </p>
+
+          <div class="hero-ctas">
+            <button class="btn btn-primary" data-open-modal data-subject="Asesoría General" data-i18n="hero_btn_primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              Solicitar Asesoría Gratuita
+            </button>
+
+            <a href="#viajeros" class="btn btn-secondary" data-i18n="hero_btn_soapex">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              Cotizar SOAPEX / RCI
+            </a>
+
+            <a href="#" class="btn btn-whatsapp-outline" id="hero-wa-btn" aria-label="WhatsApp directo con Jeanette">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+              WhatsApp Directo
+            </a>
+          </div>
+
+          <div class="hero-trust-row">
+            <div class="trust-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span data-i18n="hero_trust_1">Registro CMF Oficial</span>
+            </div>
+            <div class="trust-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span data-i18n="hero_trust_2">100% Independiente</span>
+            </div>
+            <div class="trust-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span data-i18n="hero_trust_3">Sin costo extra para ti</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Tarjeta de Jeanette Salinas Ponce -->
+        <div class="hero-card">
+          <div class="hero-card-pattern"></div>
+          
+          <div class="profile-header">
+            <img src="brand-icon.png" alt="Jeanette Salinas Ponce" class="profile-avatar-large" />
+            <div class="profile-info">
+              <h3 data-i18n="profile_name">Jeanette Salinas Ponce</h3>
+              <p data-i18n="profile_role">Corredora Oficial de Seguros</p>
+              <div class="profile-cmf-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5zm-2 16l-4-4 1.41-1.41L10 15.17l6.59-6.59L18 10l-8 8z"/></svg>
+                <span data-i18n="profile_badge">Registro CMF Verificado</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-card-highlights">
+            <div class="card-highlight-box">
+              <span class="card-highlight-number" data-i18n="stat_1_num">100%</span>
+              <span class="card-highlight-label" data-i18n="stat_1_label">Asesoría Fiduciaria e Imparcial</span>
+            </div>
+            <div class="card-highlight-box">
+              <span class="card-highlight-number" data-i18n="stat_2_num">+15</span>
+              <span class="card-highlight-label" data-i18n="stat_2_label">Aseguradoras Reguladas</span>
+            </div>
+          </div>
+
+          <div class="hero-card-cta-box">
+            <p data-i18n="profile_box_text">¿Tienes dudas sobre una póliza o tuviste un siniestro?</p>
+            <button class="btn btn-secondary btn-sm" data-open-modal data-subject="Consulta Directa Jeanette" data-i18n="profile_box_btn" style="width: 100%;">
+              Hablar con Jeanette
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       EL MANIFIESTO: LA FRASE DE JEANETTE (Elegancia Editorial)
+       ====================================================================== -->
+  <section class="quote-banner-section">
+    <div class="container">
+      <div class="quote-banner-card">
+        <div class="quote-decor">“</div>
+        <div class="quote-content">
+          <span class="quote-tagline" data-i18n="quote_tagline">Filosofía Fiduciaria</span>
+          <blockquote class="quote-text" data-i18n="quote_text">
+            «¿Qué tanto estoy creciendo, pero qué tanto estoy contribuyendo?»
+          </blockquote>
+          <div class="quote-author" data-i18n="quote_author">
+            — <strong>Jeanette Salinas Ponce</strong> · Corredora Oficial de Seguros
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SELECTOR MODULAR DE SERVICIOS (Feather Tabs Architecture)
+       ====================================================================== -->
+  <section id="servicios" class="services-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" data-i18n="services_tag">Catálogo Modular</span>
+        <h2 class="section-title" data-i18n="services_title">Protección a tu medida, sin letra chica</h2>
+        <p class="section-desc" data-i18n="services_desc">
+          Selecciona tu perfil para conocer las coberturas principales. Si necesitas un ramo específico, yo lo gestiono de inmediato.
+        </p>
+      </div>
+
+      <!-- Selector de 3 Pestañas Elegantes -->
+      <div class="tabs-container">
+        <div class="tabs-wrapper" role="tablist">
+          <button class="tab-btn active" data-target="personal" role="tab" aria-selected="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <span data-i18n="tab_personal">Personas y Familias</span>
+          </button>
+          <button class="tab-btn" data-target="business" role="tab" aria-selected="false">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            <span data-i18n="tab_business">Empresas y Pymes</span>
+          </button>
+          <button class="tab-btn" data-target="travelers" role="tab" aria-selected="false">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span data-i18n="tab_travelers">Viajeros & Tránsito Internacional</span>
+            <span class="tab-badge-intl">SOAPEX</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- GRUPO 1: PERSONAS Y FAMILIAS -->
+      <div id="group-personal" class="services-category-group cards-grid">
+        <!-- Salud Complementaria -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon emerald">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+              </div>
+              <span class="card-badge badge-featured">Alta Demanda</span>
+            </div>
+            <h3 class="card-title">Salud Complementaria</h3>
+            <p class="card-desc">Cobertura ambulatoria, hospitalaria y dental. Reembolsos en las mejores clínicas de Chile sin copagos imprevistos.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Reembolso de medicamentos y consultas</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Cobertura ante enfermedades de alto costo</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Seguro de Salud Complementaria">Consultar sobre Salud</button>
+          </div>
+        </div>
+
+        <!-- Vida & Protección Familiar -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon iris">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              </div>
+              <span class="card-badge">Patrimonial</span>
+            </div>
+            <h3 class="card-title">Vida & Respaldo Familiar</h3>
+            <p class="card-desc">Protege el futuro de tus hijos y seres queridos. Indemnizaciones libres de impuestos e inembargables ante imprevistos.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Cobertura de invalidez y fallecimiento</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Opciones con ahorro e inversión libre</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Seguro de Vida y Protección">Consultar sobre Vida</button>
+          </div>
+        </div>
+
+        <!-- Seguro Automotriz Voluntario -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+              </div>
+              <span class="card-badge">Deducible Inteligente</span>
+            </div>
+            <h3 class="card-title">Automotriz Integral</h3>
+            <p class="card-desc">Protección contra pérdida total, robo y daños a terceros con red de talleres oficiales y auto de reemplazo garantizado.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Asistencia en ruta 24/7 y grúa</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Gestión directa y defensa ante liquidadores</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Seguro Automotriz">Consultar sobre Auto</button>
+          </div>
+        </div>
+
+        <!-- Hogar & Desgravamen Hipotecario -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon emerald">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              </div>
+              <span class="card-badge badge-featured">Ahorro Bancario</span>
+            </div>
+            <h3 class="card-title">Hogar & Auditoría Bancaria</h3>
+            <p class="card-desc">Protege tu casa contra incendio y sismo. Desvinculamos el seguro de tu crédito hipotecario bancario ahorrando dinero real.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Eliminación de sobreprecio en bancos</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Cobertura completa de contenido y sismo</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Seguro Hogar y Desgravamen">Auditar mi Crédito</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRUPO 2: EMPRESAS Y PYMES (Inicialmente oculto) -->
+      <div id="group-business" class="services-category-group cards-grid" style="display: none;">
+        <!-- Garantía y Caución -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon emerald">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              </div>
+              <span class="card-badge badge-featured">Mercado Público</span>
+            </div>
+            <h3 class="card-title">Garantía & Caución</h3>
+            <p class="card-desc">Pólizas electrónicas para licitaciones del Estado, Mercado Público, SERVIU y contratos privados sin inmovilizar capital bancario.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Seriedad de la oferta y fiel cumplimiento</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Emisión ágil en 24-48 horas</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Póliza de Garantía y Caución">Cotizar Garantía</button>
+          </div>
+        </div>
+
+        <!-- Responsabilidad Civil -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon iris">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <span class="card-badge">Blindaje Legal</span>
+            </div>
+            <h3 class="card-title">Responsabilidad Civil</h3>
+            <p class="card-desc">Protege el patrimonio de tu empresa frente a reclamos o demandas judiciales por daños a terceros en tus operaciones comerciales.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> RC Operacional, Patronal y de Productos</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Gastos de defensa legal incluidos</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Responsabilidad Civil Empresarial">Consultar RC Empresa</button>
+          </div>
+        </div>
+
+        <!-- Colectivos de Salud y Vida -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon emerald">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </div>
+              <span class="card-badge">Beneficio Tributario</span>
+            </div>
+            <h3 class="card-title">Seguros Colectivos para Equipos</h3>
+            <p class="card-desc">Planes de salud, vida y dental para colaboradores. Fomenta la retención de talento clave con un beneficio 100% deducible de impuestos.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Desde 5 colaboradores en adelante</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Portal de autoservicio y reembolsos</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Seguro Colectivo de Salud para Empresas">Cotizar para mi Equipo</button>
+          </div>
+        </div>
+
+        <!-- Flotas y Carga -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+              </div>
+              <span class="card-badge">Logística</span>
+            </div>
+            <h3 class="card-title">Flotas Comerciales & Carga</h3>
+            <p class="card-desc">Asegura camiones, furgones, maquinaria y mercancías en tránsito nacional e internacional contra pérdidas y accidentes.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Pólizas flotantes por viaje o anuales</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Asistencia especializada en carreteras</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Seguro de Flotas y Transporte">Cotizar Flotas</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRUPO 3: VIAJEROS & INTERNACIONAL (Inicialmente oculto) -->
+      <div id="group-travelers" class="services-category-group cards-grid" style="display: none;">
+        <!-- SOAPEX -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon emerald">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <span class="card-badge badge-urgent">Obligatorio Aduana</span>
+            </div>
+            <h3 class="card-title">SOAPEX (Ingreso a Chile)</h3>
+            <p class="card-desc">Seguro Obligatorio para vehículos motorizados con matrícula extranjera que ingresan a Chile (Argentina, Brasil, Perú, Bolivia, etc.).</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Autos, camionetas, motos y motorhomes</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Emisión digital express en PDF para aduana</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <a href="#viajeros" class="btn btn-primary">Emitir SOAPEX Express</a>
+          </div>
+        </div>
+
+        <!-- RCI Mercosur -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon iris">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              </div>
+              <span class="card-badge badge-urgent">Mercosur</span>
+            </div>
+            <h3 class="card-title">RCI Internacional (Salida a Mercosur)</h3>
+            <p class="card-desc">Responsabilidad Civil Internacional para vehículos con matrícula chilena que viajan a Argentina, Brasil, Uruguay, Paraguay y Bolivia.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Exigido por gendarmería y policía caminera</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Cobertura de daños a personas y bienes</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <a href="#viajeros" class="btn btn-secondary">Emitir RCI Mercosur</a>
+          </div>
+        </div>
+
+        <!-- Asistencia en Viaje Mundial -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon emerald">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+              </div>
+              <span class="card-badge badge-featured">Mundial 24/7</span>
+            </div>
+            <h3 class="card-title">Asistencia Médica en Viaje</h3>
+            <p class="card-desc">Cobertura médica internacional en USD o EUR para turistas, nómadas digitales y ejecutivos en cualquier continente del mundo.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Cumple visados Schengen, EE.UU. y Asia</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Repatriación, equipaje y asistencia 24h</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Asistencia en Viaje Internacional">Cotizar Asistencia</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       PUERTA INTERNACIONAL: COTIZADOR EXPRESS SOAPEX & RCI (QuePlan Agility)
+       ====================================================================== -->
+  <section id="viajeros" class="wizard-section">
+    <div class="container">
+      <div class="wizard-card">
+        
+        <!-- Sidebar Informativo de Aduana y Tránsito -->
+        <div class="wizard-sidebar">
+          <div>
+            <span class="section-tag" style="background: rgba(255,255,255,0.15); color: #FFFFFF;" data-i18n="wizard_badge">
+              Puerta de Entrada Internacional
+            </span>
+            <h3 data-i18n="wizard_title">Ingreso a Chile & Mercosur</h3>
+            <p data-i18n="wizard_desc">
+              Emisión ágil del seguro obligatorio SOAPEX para ingresar a Chile y cobertura RCI para transitar en países del Mercosur.
+            </p>
+
+            <ul class="wizard-bullet-list">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span data-i18n="wizard_b1">Obligatorio por ley para aduanas y pasos fronterizos.</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span data-i18n="wizard_b2">Válido para autos, camionetas, motos y casas rodantes.</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span data-i18n="wizard_b3">Emisión digital inmediata enviada a tu correo y WhatsApp.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div style="font-size: 0.8rem; color: #94A3B8; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px;">
+            Validado según exigencias del Ministerio de Transportes y Telecomunicaciones de Chile y normativa Mercosur.
+          </div>
+        </div>
+
+        <!-- Formulario Express Interactivo -->
+        <div class="wizard-body">
+          <h4 class="wizard-form-title" data-i18n="wizard_form_title">Cotizador Express SOAPEX & RCI</h4>
+          
+          <form id="express-wizard-form">
+            <div class="form-group">
+              <label class="form-label" for="wizard-type" data-i18n="wizard_label_type">¿Qué seguro necesitas?</label>
+              <select id="wizard-type" class="form-control" required>
+                <option value="SOAPEX (Ingreso a Chile)" data-i18n="wizard_opt_soapex">SOAPEX (Vehículo extranjero entrando a Chile)</option>
+                <option value="RCI Mercosur (Salida de Chile)" data-i18n="wizard_opt_rci">RCI Mercosur (Vehículo chileno saliendo a Argentina/Brasil)</option>
+                <option value="Asistencia en Viaje" data-i18n="wizard_opt_travel">Asistencia Médica en Viaje Internacional</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="wizard-vehicle" data-i18n="wizard_label_vehicle">Tipo de Vehículo</label>
+                <select id="wizard-vehicle" class="form-control" required>
+                  <option value="Automóvil / SUV">Automóvil / SUV</option>
+                  <option value="Camioneta / Pick-up">Camioneta / Pick-up</option>
+                  <option value="Motocicleta">Motocicleta</option>
+                  <option value="Casa Rodante / Motorhome">Casa Rodante / Motorhome</option>
+                  <option value="Camión / Transporte">Camión / Transporte</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="wizard-country" data-i18n="wizard_label_country">País de Origen / Matrícula</label>
+                <input type="text" id="wizard-country" class="form-control" placeholder="Ej: Argentina, Brasil, Perú..." required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="wizard-duration" data-i18n="wizard_label_duration">Tiempo de Estadía / Cobertura</label>
+              <select id="wizard-duration" class="form-control" required>
+                <option value="15 a 30 días">Hasta 30 días (Turismo standard)</option>
+                <option value="60 a 90 días">Hasta 90 días (Temporada / estadía larga)</option>
+                <option value="1 año (Anual)">Póliza Anual</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-accent" style="width: 100%; margin-top: 10px;" data-i18n="wizard_btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Solicitar Emisión con Jeanette
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       EL MÉTODO JEANETTE (4 PASOS)
+       ====================================================================== -->
+  <section id="metodo" class="method-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" data-i18n="method_tag">Metodología Fiduciaria</span>
+        <h2 class="section-title" data-i18n="method_title">Cómo te acompaño en 4 pasos</h2>
+        <p class="section-desc" data-i18n="method_desc">
+          Un proceso transparente, personal y humano frente a la burocracia bancaria.
+        </p>
+      </div>
+
+      <div class="method-grid">
+        <div class="method-step">
+          <div class="step-number">01</div>
+          <h3 class="step-title" data-i18n="step1_title">01. Escucho tus necesidades</h3>
+          <p class="step-desc" data-i18n="step1_desc">
+            Conversamos brevemente para entender qué te preocupa proteger, tu presupuesto y necesidades reales.
+          </p>
+        </div>
+
+        <div class="method-step">
+          <div class="step-number">02</div>
+          <h3 class="step-title" data-i18n="step2_title">02. Comparo el mercado</h3>
+          <p class="step-desc" data-i18n="step2_desc">
+            Busco de forma 100% imparcial entre las más de 15 aseguradoras reguladas por la CMF en Chile.
+          </p>
+        </div>
+
+        <div class="method-step">
+          <div class="step-number">03</div>
+          <h3 class="step-title" data-i18n="step3_title">03. Te explico la letra chica</h3>
+          <p class="step-desc" data-i18n="step3_desc">
+            En lenguaje simple, sin tecnicismos opacos: sabrás exactamente qué te cubre y qué no ante cualquier evento.
+          </p>
+        </div>
+
+        <div class="method-step">
+          <div class="step-number">04</div>
+          <h3 class="step-title" data-i18n="step4_title">04. Yo gestiono por ti</h3>
+          <p class="step-desc" data-i18n="step4_desc">
+            Te acompaño durante la vigencia de la póliza y defiendo tus derechos técnicos ante la aseguradora en caso de siniestro.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       ALIANZAS COMERCIALES B2B
+       ====================================================================== -->
+  <section id="alianzas" class="alliances-section">
+    <div class="container">
+      <div class="alliances-banner">
+        <div>
+          <span class="section-tag" data-i18n="alliances_tag">Canal B2B</span>
+          <h2 class="section-title" data-i18n="alliances_title">Alianzas Comerciales & Convenios</h2>
+          <p class="section-desc" style="margin-bottom: 24px;" data-i18n="alliances_desc">
+            Generamos alianzas de valor con agencias de viaje, tour operadores, empresas de transporte y rent-a-car. Protege a tus clientes y pasajeros con condiciones preferentes y respaldo profesional continuo.
+          </p>
+          <button class="btn btn-primary" data-open-modal data-subject="Alianza Comercial B2B" data-i18n="alliances_btn">
+            Coordinar Reunión de Alianza
+          </button>
+        </div>
+
+        <div class="alliances-cards-mini">
+          <div class="alliance-item-box">
+            <h4>Agencias de Viaje</h4>
+            <p>Emisión express de asistencias y comisiones preferentes para tus paquetes.</p>
+          </div>
+          <div class="alliance-item-box">
+            <h4>Tour Operadores</h4>
+            <p>Cobertura internacional para grupos y turismo receptivo en Chile.</p>
+          </div>
+          <div class="alliance-item-box">
+            <h4>Empresas de Transporte</h4>
+            <p>Pólizas de carga, responsabilidad civil y flotas comerciales.</p>
+          </div>
+          <div class="alliance-item-box">
+            <h4>Rent-a-Car</h4>
+            <p>Convenios SOAPEX y RCI para conductores y turistas que cruzan fronteras.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       TABLA COMPARATIVA: JEANETTE VS BANCOS VS COMPARADORES MASIVOS
+       ====================================================================== -->
+  <section class="comparison-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Diferencia Fiduciaria</span>
+        <h2 class="section-title">¿Por qué trabajar con Jeanette?</h2>
+        <p class="section-desc">Comparativa transparente entre un broker fiduciario y los canales tradicionales en Chile.</p>
+      </div>
+
+      <div class="comparison-table-wrapper">
+        <div class="table-responsive">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Factor Clave</th>
+                <th class="col-jeanette">JSP Seguros · Jeanette</th>
+                <th>Bancos Tradicionales</th>
+                <th>Comparadores Web Masivos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Asesoría fiduciaria personalizada</strong></td>
+                <td class="col-jeanette"><span class="check-icon">✓ Sí, 100% dedicada</span></td>
+                <td><span class="cross-icon">✕ No (Venta de ventanilla)</span></td>
+                <td><span class="cross-icon">✕ No (Algoritmo automatizado)</span></td>
+              </tr>
+              <tr>
+                <td><strong>Defensa activa en caso de siniestro</strong></td>
+                <td class="col-jeanette"><span class="check-icon">✓ Sí, patrocinio técnico directo</span></td>
+                <td><span class="cross-icon">✕ No (Derivan a call-center)</span></td>
+                <td><span class="cross-icon">✕ No (Sin soporte presencial)</span></td>
+              </tr>
+              <tr>
+                <td><strong>Independencia real de aseguradoras</strong></td>
+                <td class="col-jeanette"><span class="check-icon">✓ Sí (+15 compañías)</span></td>
+                <td><span class="cross-icon">✕ No (Compañía filial cautiva)</span></td>
+                <td><span class="cross-icon">✕ Parcial (Privilegian comisiones)</span></td>
+              </tr>
+              <tr>
+                <td><strong>Emisión express SOAPEX & RCI</strong></td>
+                <td class="col-jeanette"><span class="check-icon">✓ Sí, digital e internacional</span></td>
+                <td><span class="cross-icon">✕ No disponible</span></td>
+                <td><span class="cross-icon">✕ Trámite lento o confuso</span></td>
+              </tr>
+              <tr>
+                <td><strong>Costo adicional sobre la póliza</strong></td>
+                <td class="col-jeanette"><span class="check-icon">✓ $0 (Sin costo para ti)</span></td>
+                <td><span class="cross-icon">✕ Con sobreprecio histórico FNE</span></td>
+                <td><span class="check-icon">✓ $0</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       ASEGURADORAS REGULADAS (Alianzas de Mercado)
+       ====================================================================== -->
+  <section class="carriers-section">
+    <div class="container">
+      <div class="carriers-title" data-i18n="carriers_title">
+        Operamos de forma independiente con las principales aseguradoras reguladas por la CMF
+      </div>
+      <div class="carriers-grid">
+        <span class="carrier-pill">Bci Seguros</span>
+        <span class="carrier-pill">HDI Seguros</span>
+        <span class="carrier-pill">Mapfre</span>
+        <span class="carrier-pill">Zurich</span>
+        <span class="carrier-pill">Sura</span>
+        <span class="carrier-pill">Consorcio</span>
+        <span class="carrier-pill">MetLife</span>
+        <span class="carrier-pill">Chilena Consolidada</span>
+        <span class="carrier-pill">Reale Seguros</span>
+        <span class="carrier-pill">Liberty Seguros</span>
+        <span class="carrier-pill">Assist Card</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       FOOTER
+       ====================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>JSP Seguros</h4>
+          <p data-i18n="footer_desc">
+            Asesoría fiduciaria independiente en seguros generales, vida, salud y tránsito internacional. Comprometida con proteger tu patrimonio y acompañarte cuando más lo necesitas.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Para Familias</h5>
+          <ul class="footer-links">
+            <li><a href="#servicios" data-open-modal data-subject="Seguro de Salud">Salud Complementaria</a></li>
+            <li><a href="#servicios" data-open-modal data-subject="Seguro de Vida">Vida & Respaldo</a></li>
+            <li><a href="#servicios" data-open-modal data-subject="Seguro Automotriz">Automotriz Integral</a></li>
+            <li><a href="#servicios" data-open-modal data-subject="Seguro Hogar">Hogar & Sismo</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Empresas & Viajeros</h5>
+          <ul class="footer-links">
+            <li><a href="#viajeros">SOAPEX para ingresar a Chile</a></li>
+            <li><a href="#viajeros">RCI Mercosur</a></li>
+            <li><a href="#servicios" data-open-modal data-subject="Garantía y Caución">Garantía & Licitaciones</a></li>
+            <li><a href="#alianzas">Alianzas Comerciales B2B</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Contacto Oficial</h5>
+          <ul class="footer-links">
+            <li><a href="mailto:js0565330@gmail.com">js0565330@gmail.com</a></li>
+            <li><a href="#" id="footer-wa-link">Atención por WhatsApp</a></li>
+            <li><span>Santiago, Chile</span></li>
+            <li><a href="agenda.html" style="opacity: 0.5; font-size: 0.75rem;">Acceso Operativo Interno</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div data-i18n="footer_rights">© 2026 JSP Seguros · Jeanette Salinas Ponce. Todos los derechos reservados.</div>
+        <div>Supervisada por la Comisión para el Mercado Financiero (CMF) de Chile.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       BOTÓN FLOTANTE DE WHATSAPP INTELIGENTE (Contextual)
+       ====================================================================== -->
+  <a href="#" id="whatsapp-floating-btn" class="whatsapp-floating" aria-label="Hablar con Jeanette por WhatsApp">
+    <div class="whatsapp-tooltip" id="whatsapp-tooltip-text">Asesoría con Jeanette</div>
+    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+    <span>WhatsApp</span>
+  </a>
+
+  <!-- ======================================================================
+       MODAL DE ASESORÍA & CONTACTO
+       ====================================================================== -->
+  <div id="contact-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <button id="modal-close-btn" class="modal-close-btn" aria-label="Cerrar ventana">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <h3 id="modal-title" style="margin-bottom: 8px; font-size: 1.35rem; color: var(--primary-navy);">
+        Solicitud de Asesoría Gratuita
+      </h3>
+      <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 20px;">
+        Déjame tus datos y te contactaré personalmente para evaluar tus coberturas sin costo ni compromiso.
+      </p>
+
+      <form id="consultation-form">
+        <input type="hidden" id="form-subject" value="General" />
+
+        <div class="form-group">
+          <label class="form-label" for="form-name">Nombre Completo *</label>
+          <input type="text" id="form-name" class="form-control" placeholder="Ej: Marcela González" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="form-phone">Teléfono / WhatsApp *</label>
+            <input type="tel" id="form-phone" class="form-control" placeholder="+56 9 ..." required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="form-email">Correo Electrónico *</label>
+            <input type="email" id="form-email" class="form-control" placeholder="correo@ejemplo.com" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="form-notes">¿Qué necesitas proteger o qué dudas tienes?</label>
+          <textarea id="form-notes" class="form-control" rows="3" placeholder="Cuéntame brevemente tu caso o seguro de interés..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+          Enviar y Coordinar con Jeanette
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script interactivo -->
+  <script src="jsp-app.js?v=1.0"></script>
+</body>
+</html>
