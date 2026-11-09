@@ -1,2816 +1,837 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <meta name="theme-color" content="#fbf8f1" />
-  <title>MindJeanette · Agenda operativa</title>
-  <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png?v=2" />
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2" />
-  <link rel="apple-touch-icon" href="brand-icon.png?v=2" />
-  <meta name="application-name" content="MindJeanette" />
-  <meta name="apple-mobile-web-app-title" content="MindJeanette" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="mindfer-domain" content="mindjeanette.app" />
+  <title>JSP Seguros · Jeanette Salinas Ponce | Corredora Oficial de Seguros CMF</title>
+  
+  <meta name="description" content="Asesoría fiduciaria e independiente en seguros para familias, empresas y viajeros de todo el mundo. Emisión express de SOAPEX para ingresar a Chile y RCI Mercosur." />
+  <meta name="keywords" content="JSP Seguros, Jeanette Salinas Ponce, Corredora de Seguros Chile, SOAPEX Chile, RCI Mercosur, Seguros de Viaje, CMF Chile, Seguros de Salud y Vida" />
+  <meta name="theme-color" content="#FAF8F5" />
+  
+  <!-- Open Graph / Redes Sociales -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="JSP Seguros · Jeanette Salinas Ponce | Corredora Oficial de Seguros" />
+  <meta property="og:description" content="Tu tranquilidad asegurada. Yo gestiono por ti. Asesoría fiduciaria para personas, pymes y viajeros internacionales." />
+  <meta property="og:image" content="brand-icon.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="apple-touch-icon" href="brand-icon.png" />
+
+  <!-- Tipografías Google Fonts: Plus Jakarta Sans (UI moderna estilo Alan) + Newsreader (Editorial cálido fiduciario) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@700&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=8.7" />
-  <style>
-    .linkedin, .color-linkedin { background: #0A66C2; color: #fff; }
-    .completed h3 { text-decoration: none !important; }
-    /* Contraste consistente dentro de las tarjetas. */
-    .color-linkedin, .color-web, .color-research, .color-tiktok { color: #fff; }
-    .color-linkedin p, .color-web p, .color-research p, .color-tiktok p { color: rgba(255,255,255,.9); }
-    .color-linkedin .tag, .color-linkedin .status, .color-web .tag, .color-web .status, .color-research .tag, .color-research .status, .color-tiktok .tag, .color-tiktok .status { color: #111; background: #fff; }
-    .color-whatsapp, .color-email, .color-instagram, .color-sales, .color-neutral { color: #111; }
-    .color-whatsapp p, .color-email p, .color-instagram p, .color-sales p, .color-neutral p { color: rgba(17,17,17,.82); }
-    .color-whatsapp .tag, .color-email .tag, .color-instagram .tag, .color-sales .tag, .color-neutral .tag, .color-whatsapp .status, .color-email .status, .color-instagram .status, .color-sales .status, .color-neutral .status { color: #111; background: rgba(255,255,255,.82); }
-    /* Ocultar badge superior derecho, status y tema en las tarjetas comprimidas */
-    .card-amount, .card-footer .tag, .card-footer .status { display: none !important; }
-    .card-footer { display: none !important; }
-    /* Reuniones: sin casilla de verificación */
-    .type-meeting .check { display: none !important; }
-    .card-inline-link:hover { opacity: 1 !important; }
-    .card-stage-pill { position: absolute; top: 6px; right: 7px; font-size: 11px; line-height: 1; display: inline-flex; align-items: center; z-index: 2; }
-
-    /* Tarjetas elegantes: bordes redondeados, texto centrado y sin espacio sobrante abajo */
-    .task-card:not(.link-bookmark-card):not(.image-only) {
-      border-radius: 10px !important;
-      overflow: hidden !important;
-    }
-    .task-card:not(.link-bookmark-card):not(.type-todo-table):not(.type-contact):not(.type-video) .card-copy {
-      padding: 12px 14px !important;
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      justify-content: center !important;
-      text-align: center !important;
-      position: relative !important;
-    }
-    .task-card:not(.link-bookmark-card):not(.type-todo-table):not(.type-contact):not(.type-video) .task-top {
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center !important;
-      width: 100% !important;
-      text-align: center !important;
-    }
-    .task-card:not(.link-bookmark-card):not(.type-todo-table):not(.type-contact):not(.type-video) h3 {
-      margin: 0 !important;
-      font-size: 13px !important;
-      line-height: 1.25 !important;
-      font-weight: 800 !important;
-      text-align: center !important;
-      width: 100% !important;
-    }
-    .task-card:not(.link-bookmark-card):not(.type-todo-table):not(.type-contact):not(.type-video) p {
-      font-size: 11px !important;
-      line-height: 1.35 !important;
-      margin: 4px 0 0 !important;
-      text-align: center !important;
-      width: 100% !important;
-      display: -webkit-box !important;
-      -webkit-line-clamp: 2 !important;
-      -webkit-box-orient: vertical !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-    }
-
-    /* Panel de Detalle Limpio y Rediseñado */
-    .detail-header-identity {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 14px;
-    }
-    .detail-avatar {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #e2e8f0;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      flex-shrink: 0;
-    }
-    .detail-identity-text {
-      flex: 1;
-      min-width: 0;
-    }
-    .detail-identity-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .detail-title {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 800;
-      color: #0f172a;
-      letter-spacing: -0.4px;
-      line-height: 1.25;
-      word-break: break-word;
-      flex: 1;
-      min-width: 0;
-    }
-    .detail-header-actions {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      flex-shrink: 0;
-    }
-    .detail-header-stage-group {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: #f1f5f9;
-      padding: 3px 5px;
-      border-radius: 8px;
-    }
-    .detail-stage-btn-mini {
-      width: 26px;
-      height: 26px;
-      border-radius: 6px;
-      border: 1px solid transparent;
-      background: transparent;
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      color: #64748b;
-      transition: all .15s ease;
-      padding: 0;
-    }
-    .detail-stage-btn-mini svg {
-      width: 15px;
-      height: 15px;
-      display: block;
-    }
-    .detail-stage-btn-mini:hover {
-      background: #ffffff;
-      color: #0f172a;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    }
-    .detail-stage-btn-mini.active[data-stage="idea"] {
-      background: #fef3c7 !important;
-      border-color: #f59e0b !important;
-      color: #b45309 !important;
-      box-shadow: 0 1px 4px rgba(245,158,11,0.25) !important;
-    }
-    .detail-stage-btn-mini.active[data-stage="conexion"] {
-      background: #e0f2fe !important;
-      border-color: #0284c7 !important;
-      color: #0369a1 !important;
-      box-shadow: 0 1px 4px rgba(2,132,199,0.25) !important;
-    }
-    .detail-stage-btn-mini.active[data-stage="accion"] {
-      background: #fee2e2 !important;
-      border-color: #ef4444 !important;
-      color: #b91c1c !important;
-      box-shadow: 0 1px 4px rgba(239,68,68,0.25) !important;
-    }
-    .detail-header-sep {
-      display: inline-block;
-      width: 1px;
-      height: 18px;
-      background: #cbd5e1;
-      margin: 0 2px;
-    }
-    .detail-edit-pencil {
-      border: none;
-      background: transparent;
-      color: #111111;
-      padding: 2px;
-      height: 24px;
-      width: 24px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      opacity: 0.7;
-      border-radius: 4px;
-      transition: all .15s ease;
-    }
-    .detail-edit-pencil:hover {
-      background: #f1f5f9;
-      color: #111111;
-      opacity: 1;
-    }
-    .detail-subtitle {
-      font-size: 12px;
-      color: #64748b;
-      font-weight: 600;
-      margin-top: 3px;
-      line-height: 1.35;
-      word-break: break-word;
-    }
-
-    /* Barra de metadatos unificada: Registro | Proyecto | Tema | DDMMAA | 00:00 */
-    .detail-meta-bar {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 6px;
-      padding: 9px 12px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      margin-bottom: 16px;
-      font-size: 11px;
-      font-weight: 700;
-      color: #334155;
-    }
-    .detail-meta-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 2px 7px;
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      color: #1e293b;
-    }
-    .detail-meta-pill.pill-reg {
-      background: #eff6ff;
-      border-color: #bfdbfe;
-      color: #1d4ed8;
-      text-transform: uppercase;
-      font-size: 10px;
-      letter-spacing: 0.3px;
-    }
-    .detail-meta-pill.pill-time {
-      font-family: "DM Mono", monospace;
-      color: #475569;
-    }
-    .detail-meta-sep {
-      color: #94a3b8;
-      font-weight: 400;
-    }
-
-    /* Selector de Flujo Operativo: Solo los 3 iconos seleccionables */
-    .detail-stage-box {
-      margin: 16px 0;
-      padding: 12px 14px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-    }
-    .detail-stage-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    .detail-stage-head span {
-      font-size: 10px;
-      font-family: 'DM Mono', monospace;
-      font-weight: 700;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .detail-stage-current {
-      font-size: 11px !important;
-      font-weight: 800 !important;
-      color: #0f172a !important;
-    }
-    .detail-stage-icons {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      padding: 4px 0;
-    }
-    .detail-stage-icon-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      border: 1px solid #cbd5e1;
-      background: #ffffff;
-      font-size: 20px;
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      transition: all .15s ease;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-    .detail-stage-icon-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      border-color: #94a3b8;
-    }
-    .detail-stage-icon-btn.active[data-stage="idea"] {
-      background: #fef3c7 !important;
-      border-color: #f59e0b !important;
-      box-shadow: 0 2px 8px rgba(245,158,11,0.3) !important;
-      transform: scale(1.06);
-    }
-    .detail-stage-icon-btn.active[data-stage="conexion"] {
-      background: #e0f2fe !important;
-      border-color: #0284c7 !important;
-      box-shadow: 0 2px 8px rgba(2,132,199,0.3) !important;
-      transform: scale(1.06);
-    }
-    .detail-stage-icon-btn.active[data-stage="accion"] {
-      background: #fee2e2 !important;
-      border-color: #ef4444 !important;
-      box-shadow: 0 2px 8px rgba(239,68,68,0.3) !important;
-      transform: scale(1.06);
-    }
-
-    /* Botón / Píldora de Enlace limpia */
-    .detail-link-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 9px 14px;
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      color: #1d4ed8;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      text-decoration: none;
-      word-break: break-all;
-      transition: all .15s;
-    }
-    .detail-link-btn:hover {
-      background: #dbeafe;
-      border-color: #93c5fd;
-    }
-
-    /* Sección de pensamientos y notas privadas */
-    .detail-thoughts-box {
-      margin: 16px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .detail-thoughts-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .detail-thoughts-head label {
-      font-size: 11px;
-      font-weight: 800;
-      color: #334155;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .detail-thoughts-head small {
-      font-size: 10px;
-      color: #94a3b8;
-    }
-    .detail-thoughts-textarea {
-      width: 100%;
-      box-sizing: border-box;
-      min-height: 105px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      padding: 10px 12px;
-      font-family: "Manrope", system-ui, sans-serif;
-      font-size: 13px;
-      line-height: 1.5;
-      color: #0f172a;
-      background: #f8fafc;
-      resize: vertical;
-      outline: none;
-      transition: border-color .15s, background .15s;
-    }
-    .detail-thoughts-textarea:focus {
-      background: #ffffff;
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 2px rgba(59,130,246,0.15);
-    }
-
-    /* Botón eliminar al pie */
-    .detail-delete-btn {
-      margin-top: 20px;
-      width: 100%;
-      padding: 9px 14px;
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      border-radius: 8px;
-      color: #dc2626;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: background .15s;
-    }
-    .detail-delete-btn:hover {
-      background: #fee2e2;
-    }
-
-    /* Tarjeta compacta de Contacto estilo Milanote (horizontal) */
-    .task-card.type-contact, .contact-card {
-      width: 100% !important;
-      background: #202226 !important;
-      color: #fff !important;
-      border: 1px solid rgba(255, 255, 255, 0.08) !important;
-      border-radius: 8px !important;
-      padding: 9px 12px !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 12px !important;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;
-      cursor: pointer !important;
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease !important;
-      position: relative !important;
-      overflow: hidden !important;
-      box-sizing: border-box !important;
-    }
-    .contact-card:hover {
-      background: #272a30 !important;
-      transform: translateY(-2px) !important;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.28) !important;
-      border-color: rgba(255, 255, 255, 0.16) !important;
-    }
-    .contact-squircle {
-      width: 40px !important;
-      height: 40px !important;
-      min-width: 40px !important;
-      border-radius: 12px !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      overflow: hidden !important;
-      font-size: 19px !important;
-      flex-shrink: 0 !important;
-      background: #c084fc !important;
-      color: #1e1b4b !important;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
-    }
-    .contact-squircle img {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: cover !important;
-    }
-    .contact-details {
-      display: flex !important;
-      flex-direction: column !important;
-      gap: 2px !important;
-      min-width: 0 !important;
-      flex: 1 !important;
-    }
-    .contact-name {
-      font-size: 13px !important;
-      font-weight: 800 !important;
-      color: #ffffff !important;
-      line-height: 1.25 !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-    }
-    .contact-sub {
-      font-size: 11px !important;
-      color: #94a3b8 !important;
-      line-height: 1.2 !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-    }
-    .contact-del-btn {
-      position: absolute !important;
-      top: 4px !important;
-      right: 4px !important;
-      width: 18px !important;
-      height: 18px !important;
-      border-radius: 50% !important;
-      background: rgba(0,0,0,.6) !important;
-      color: #fff !important;
-      border: 0 !important;
-      padding: 0 !important;
-      display: none !important;
-      place-items: center !important;
-      font-size: 12px !important;
-      line-height: 1 !important;
-      cursor: pointer !important;
-      z-index: 5 !important;
-    }
-    .contact-card:hover .contact-del-btn {
-      display: grid !important;
-    }
-    .contact-del-btn:hover {
-      background: #dc2626 !important;
-    }
-    .color-linkedin .tag, .color-linkedin .status, .color-web .tag, .color-web .status, .color-research .tag, .color-research .status, .color-tiktok .tag, .color-tiktok .status { color: #fff; background: transparent; }
-    .color-whatsapp .tag, .color-email .tag, .color-instagram .tag, .color-sales .tag, .color-neutral .tag, .color-whatsapp .status, .color-email .status, .color-instagram .status, .color-sales .status, .color-neutral .status { color: #111; background: transparent; }
-    .color-linkedin .check, .color-web .check, .color-research .check, .color-tiktok .check, .color-x .check { border-color: #fff; background: transparent; }
-    .color-linkedin .check:checked, .color-web .check:checked, .color-research .check:checked, .color-tiktok .check:checked, .color-x .check:checked { background: #fff; }
-    .color-linkedin .check:checked:after, .color-web .check:checked:after, .color-research .check:checked:after, .color-tiktok .check:checked:after, .color-x .check:checked:after { color: #111; }
-    .color-sales, .color-sales p, .color-sales .tag, .color-sales .status, .color-sales .card-amount { color: #fff !important; }
-    .color-x { background: #1f242d !important; color: #fff !important; }
-    .color-x p, .color-x .status { color: rgba(255,255,255,.88) !important; }
-    .color-x .tag { background: rgba(255,255,255,.18) !important; color: #fff !important; }
-    .completed h3, .completed p, .completed .tag, .completed .status, .completed .card-amount { color: inherit !important; opacity: 1 !important; }
-    .task-schedule{display:block;margin-top:5px;font:700 10px/1.2 "DM Mono",monospace;letter-spacing:.02em;color:inherit;opacity:.92}
-    .capture-dialog, .task-dialog, #projectDialog {
-      width: min(440px, 92vw) !important;
-      border: 0 !important;
-      border-radius: 12px !important;
-      padding: 0 !important;
-      background: #fff !important;
-      box-shadow: 0 16px 50px rgba(33,38,48,.24) !important;
-      overflow-y: auto !important;
-      overflow-x: hidden !important;
-      max-height: min(680px, 92vh) !important;
-      max-height: min(680px, 92dvh) !important;
-    }
-    .capture-dialog::backdrop, .task-dialog::backdrop, #projectDialog::backdrop {
-      background: rgba(27,31,38,.24) !important;
-      backdrop-filter: blur(2px) !important;
-    }
-    .capture-dialog form, .task-dialog form, #projectDialog form {
-      padding: 16px 20px !important;
-      box-sizing: border-box !important;
-    }
-    .task-dialog-head {
-      display: flex !important;
-      justify-content: space-between !important;
-      align-items: center !important;
-      margin-bottom: 12px !important;
-    }
-    .task-dialog-head h2 {
-      margin: 0 !important;
-      font-size: 17px !important;
-      font-weight: 800 !important;
-      letter-spacing: -.4px !important;
-      color: #1a1e24 !important;
-    }
-    .dialog-close {
-      border: 0 !important;
-      background: transparent !important;
-      font-size: 20px !important;
-      color: #8a8f98 !important;
-      line-height: 1 !important;
-      cursor: pointer !important;
-      padding: 2px 4px !important;
-    }
-    .dialog-close:hover { color: #111 !important; }
-    .capture-field {
-      display: block !important;
-      margin: 0 0 10px !important;
-      font-size: 11px !important;
-      font-weight: 700 !important;
-      color: #444b54 !important;
-    }
-    .capture-field input, .capture-field textarea, .capture-field select {
-      display: block !important;
-      width: 100% !important;
-      margin-top: 4px !important;
-      border: 1px solid #d5d9dd !important;
-      border-radius: 6px !important;
-      padding: 7px 9px !important;
-      font: 12px Manrope,sans-serif !important;
-      outline: 0 !important;
-      background: #fff !important;
-      box-sizing: border-box !important;
-    }
-    .capture-field textarea {
-      min-height: 56px !important;
-      resize: vertical !important;
-    }
-    .capture-field input:focus, .capture-field textarea:focus, .capture-field select:focus {
-      border-color: #6178ec !important;
-      box-shadow: 0 0 0 2px rgba(97,120,236,.14) !important;
-    }
-    .task-dialog-actions {
-      display: flex !important;
-      justify-content: flex-end !important;
-      gap: 8px !important;
-      margin-top: 12px !important;
-      padding-top: 10px !important;
-      border-top: 1px solid #edf0f2 !important;
-    }
-    .task-dialog-actions button {
-      border: 0 !important;
-      border-radius: 6px !important;
-      padding: 7px 13px !important;
-      font-size: 12px !important;
-      font-weight: 700 !important;
-      background: #eef0f1 !important;
-      color: #626a73 !important;
-      cursor: pointer !important;
-    }
-    .task-dialog-actions button[value="default"], .task-dialog-actions button[type="submit"], .task-dialog-actions #createTask, .task-dialog-actions #saveProject {
-      background: #6178ec !important;
-      color: #fff !important;
-    }
-    .task-field{display:block;font-size:11px;font-weight:700}.task-field span{float:right;color:#969ba3;font:10px "DM Mono",monospace;font-weight:400}.task-field input{display:block;width:100%;margin-top:5px;border:1px solid #dadddf;border-radius:6px;padding:8px 10px;font-size:13px;outline:none}.task-field input:focus{border-color:#6178ec;box-shadow:0 0 0 2px rgba(97,120,236,.12)}.color-row{margin:12px 0}.color-field{font-size:11px;font-weight:700}.color-field input{display:block;width:100%;height:34px;margin-top:5px;padding:2px;border:1px solid #dadddf;border-radius:6px;background:#fff}.icon-picker>span{display:block;font-size:11px;font-weight:700;margin-bottom:6px}.icon-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.icon-choice{height:30px;border:1px solid #e1e4e6;border-radius:6px;background:#fff;color:#555d67;font-size:13px;font-weight:700}.icon-choice:hover,.icon-choice.selected{border-color:#6178ec;background:#eef0ff;color:#5269df}.task-preview{margin-top:14px;padding:10px;border:1px solid #e1e4e6;border-radius:6px;background:#fff;color:#737982;display:flex;gap:8px;align-items:center;font-size:12px}.task-preview span{width:22px;height:22px;border-radius:4px;display:grid;place-items:center;background:#0A66C2;color:#fff;font-size:13px}
-  </style>
-  <style>
-    /* Barra de herramientas lateral fija: compacta, limpia y ajuntada */
-    .maker-strip{position:fixed;left:0;top:76px;bottom:0;width:72px;padding:8px 4px 10px;background:#f8f9fa;border-right:1px solid #dfe2e4;box-shadow:2px 0 8px rgba(0,0,0,.04);display:flex;flex-direction:column;align-items:center;gap:2px;z-index:100;box-sizing:border-box;overflow-y:auto;scrollbar-width:none}
-    .maker-strip::-webkit-scrollbar{display:none}
-    .maker-tool,.trash-tool{width:58px;height:auto;min-height:36px;border:0;border-radius:6px;background:transparent;color:#68717b;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:2px 0;font-size:0;cursor:pointer;transition:all .15s}
-    .maker-tool b,.trash-tool b{width:25px;height:25px;border-radius:6px;background:#fff;box-shadow:0 1px 3px rgba(38,46,55,.10);display:grid;place-items:center;font-size:13px;font-weight:600;color:#475569;transition:all .15s}
-    .maker-tool span,.trash-tool span{display:block;font-size:9px;font-weight:700;line-height:1;color:#64748b;letter-spacing:-0.2px}
-    .maker-tool:hover b{color:#4f46e5;background:#f0f4ff;box-shadow:0 2px 6px rgba(79,70,229,.22)}
-    .maker-tool:hover{background:#f1f5f9}
-    .tool-separator{width:30px;border-top:1px solid #d8dce0;margin:3px 0 auto}
-    .trash-tool{margin-top:auto}
-    .trash-tool b{background:#e6e8ea;color:#9299a0}
-    .trash-tool.drag-over b{background:#ef5361;color:#fff}
-    .trash-tool.drag-over span{color:#d93c4a}
-
-    /* Stickers flotantes transparentes y decoración sin columnas */
-    .floating-note.floating-sticker{background:transparent!important;border:none!important;box-shadow:none!important;padding:0!important;min-height:40px!important}
-    .floating-sticker .sticker-img{width:100%!important;height:100%!important;object-fit:contain!important;pointer-events:none!important;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.22))!important;display:block!important}
-    .floating-sticker .floating-move,.floating-sticker .floating-del{background:rgba(0,0,0,0.65)!important;color:#fff!important;border-radius:50%!important;width:22px!important;height:22px!important;display:none!important;place-items:center!important;padding:0!important;font-size:13px!important;line-height:1!important;box-shadow:0 2px 5px rgba(0,0,0,0.3)!important}
-    .floating-sticker:hover .floating-move,.floating-sticker:hover .floating-del{display:grid!important}
-    .floating-sticker .floating-move{left:4px!important;top:4px!important}
-    .floating-sticker .floating-del{right:4px!important;top:4px!important}
-    .floating-sticker .floating-del:hover{background:#dc2626!important}
-    .floating-sticker .floating-move:hover{background:#4f46e5!important}
-    .floating-sticker:hover .resize-handle{display:block!important;border-color:#4f46e5!important;background:#fff!important}
-
-    /* Archivos flotantes estilo Milanote con doblez superior derecho (dog-ear) */
-    .floating-note.floating-file,
-    .floating-note.floating-link{
-      background: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-      padding: 4px 6px !important;
-      width: fit-content !important;
-      min-width: 80px !important;
-      max-width: 152px !important;
-      min-height: 70px !important;
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      text-align: center !important;
-      user-select: none !important;
-      cursor: grab !important;
-    }
-    .floating-note.floating-file:active,
-    .floating-note.floating-link:active{
-      cursor: grabbing !important;
-    }
-    .floating-file-inner{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      width: 100%;
-    }
-    .file-doc-paper{
-      position: relative;
-      width: 40px !important;
-      height: 50px !important;
-      background: #ffffff;
-      border: 1px solid #dcdfe4;
-      border-radius: 4px 11px 4px 4px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform .15s ease, box-shadow .15s ease;
-    }
-    .floating-file:hover .file-doc-paper{
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.06);
-    }
-    .file-doc-fold{
-      position: absolute;
-      top: -1px;
-      right: -1px;
-      width: 10px;
-      height: 10px;
-      background: #f1f5f9;
-      border-bottom-left-radius: 3px;
-      border-left: 1px solid #cbd5e1;
-      border-bottom: 1px solid #cbd5e1;
-      box-shadow: -1px 1px 2px rgba(0,0,0,0.05);
-    }
-    .file-doc-symbol{
-      font-family: "Montserrat", "Manrope", system-ui, sans-serif;
-      font-weight: 800;
-      line-height: 1;
-      user-select: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .file-doc-label{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: max-content;
-      max-width: 146px !important;
-      text-align: center !important;
-      padding: 0 2px;
-    }
-    .floating-note.floating-file .file-doc-name,
-    .file-doc-name{
-      font-family: "Manrope", system-ui, sans-serif !important;
-      font-size: 8.5px !important;
-      font-weight: 700 !important;
-      color: #1e293b !important;
-      line-height: 1.25 !important;
-      text-align: center !important;
-      max-width: 144px !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-      display: block !important;
-    }
-    .floating-note.floating-file .file-doc-meta,
-    .file-doc-meta{
-      font-family: "DM Mono", monospace !important;
-      font-size: 7px !important;
-      font-weight: 600 !important;
-      color: #94a3b8 !important;
-      margin-top: 1px !important;
-      text-align: center !important;
-      max-width: 144px !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-      display: block !important;
-    }
-
-    /* Ubicaciones flotantes estilo Milanote con icono de mapa y pin */
-    .floating-note.floating-location{
-      background: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-      padding: 4px 6px !important;
-      width: fit-content !important;
-      min-width: 80px !important;
-      max-width: 152px !important;
-      min-height: 70px !important;
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      text-align: center !important;
-      user-select: none !important;
-      cursor: grab !important;
-    }
-    .floating-note.floating-location:active{
-      cursor: grabbing !important;
-    }
-    .floating-location-inner{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      width: 100%;
-    }
-    .location-map-graphic{
-      position: relative;
-      width: 50px !important;
-      height: 50px !important;
-      background: #ffffff;
-      border: 1px solid rgba(0,0,0,.08);
-      border-radius: 14px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6px;
-      box-sizing: border-box;
-      transition: transform .18s ease, box-shadow .18s ease;
-    }
-    .floating-location:hover .location-map-graphic{
-      transform: scale(1.05);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-    }
-    .location-map-img{
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      pointer-events: none;
-      display: block;
-    }
-    .location-label{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: max-content;
-      max-width: 146px !important;
-      text-align: center !important;
-      padding: 0 2px;
-    }
-    .floating-note.floating-location .location-title,
-    .location-title{
-      font-family: "Manrope", system-ui, sans-serif !important;
-      font-size: 8.5px !important;
-      font-weight: 700 !important;
-      color: #1e293b !important;
-      line-height: 1.25 !important;
-      text-align: center !important;
-      max-width: 144px !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-      display: block !important;
-    }
-    .floating-note.floating-location .location-address,
-    .location-address{
-      font-size: 7px !important;
-      font-weight: 600 !important;
-      color: #94a3b8 !important;
-      font-family: "DM Mono", monospace !important;
-      margin-top: 1px !important;
-      text-align: center !important;
-      max-width: 144px !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-      display: block !important;
-    }
-
-    /* Ocultar botones de "x" y lápices en tarjetas/notas: eliminación exclusivamente por papelera y edición por doble clic */
-    .floating-del,
-    .floating-edit,
-    .image-del-btn,
-    .link-del-btn,
-    .contact-del-btn,
-    .card-del-btn,
-    .floating-move {
-      display: none !important;
-    }
-
-    /* Cabecera superior fija: Topbar, Proyectos y Temas se mantienen siempre congelados en la parte superior */
-    .sticky-header{position:sticky;top:0;z-index:100!important;background:#fff;margin:0 -34px;padding:0 34px 6px;border-bottom:1px solid #eef0f2}
-    .sticky-header .topbar{margin:0 -34px;padding:0 34px}
-    .header-controls-row{margin-left:72px;padding:13px 0 6px;display:flex;align-items:center;gap:14px;overflow-x:auto;scrollbar-width:none}
-    .header-controls-row::-webkit-scrollbar{display:none}
-    .header-controls-row .project-picker{flex-shrink:0;display:flex;align-items:center;gap:7px;position:relative}
-    .header-controls-row .controls-divider{width:1px;height:24px;background:#e2e8f0;flex-shrink:0}
-    .header-controls-row .channels{margin-left:0;padding:0;display:flex;align-items:center;gap:8px;flex-shrink:0;min-width:0;scrollbar-width:none}
-    .header-controls-row .channels::-webkit-scrollbar{display:none}
-    .new-channel-trigger, .del-channel-trigger{border:1px dashed #b8bec6;border-radius:5px;background:#f8f9fb;width:30px;height:30px;min-width:30px;padding:0;display:grid;place-items:center;color:#4f5763;cursor:pointer;transition:all .15s;flex-shrink:0}
-    .new-channel-trigger:hover{background:#eef2fd;border-color:#6178ec;color:#6178ec}
-    .del-channel-trigger:hover{background:#fee2e2;border-color:#ef4444;color:#dc2626}
-    .new-channel-trigger .add-icon, .del-channel-trigger .del-icon{background:transparent;color:inherit;font-size:18px;font-weight:700;width:auto;height:auto;display:grid;place-items:center;line-height:1}
-    .channel{cursor:default;user-select:none}
-    .channel:hover{background:transparent!important;box-shadow:none!important}
-    .detail-panel{z-index:120!important}
-    .overlay{z-index:115!important}
-    
-    /* Cuadrícula amplia y espaciosa: flujo natural sin compresión */
-    /* Cuadrícula semanal: 6 columnas con ancho 100% idéntico y unificado para todos los días (Lunes a Viernes y Fin de semana) */
-    .week-board{margin-left:var(--sidebar-w,72px);display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(6px,1vw,14px);min-height:380px;padding:clamp(8px,1.2vw,16px) clamp(6px,1vw,14px);background:#fff;border:1px solid #e1e4e6;border-radius:8px;overflow-x:visible;align-items:stretch}
-    .day-column{min-width:0;min-height:280px;display:flex;flex-direction:column}
-    .day-header{display:flex;justify-content:space-between;align-items:baseline;padding:0 4px 10px;border-bottom:1px solid #eef0f2;margin-bottom:10px}
-    .day-header h2{margin:0;font-size:16px;font-weight:800;letter-spacing:-.4px;display:flex;align-items:baseline;gap:6px}
-    .day-number{font-size:14px;font-weight:600;color:#8a9199}
-    .day-count{font:10px "DM Mono",monospace;color:#9ba0a6;background:#f3f4f6;padding:2px 7px;border-radius:10px}
-    .task-list{min-height:180px;display:flex;flex-direction:column;gap:10px;flex:1}
-    .task-card{flex-shrink:0}
-
-    /* Columna combinada de fin de semana: Sábado crece con su contenido y Domingo se posiciona limpio debajo */
-    .weekend-column{display:flex;flex-direction:column;gap:12px;min-height:280px}
-    .weekend-section.saturday{flex:none;display:flex;flex-direction:column}
-    .weekend-section.sunday{flex:1;min-height:100px;display:flex;flex-direction:column;border-top:1px dashed #dbe0e4;padding-top:12px}
-    .weekend-section .task-list{min-height:80px;flex:1}
-
-    /* Indicador y cursor: solo las notas abren el panel desplegable */
-    .task-card.is-desplegable{cursor:pointer}
-    .task-card:not(.is-desplegable){cursor:grab}
-    .task-card.type-todo-table{cursor:default}
-    .task-card.type-todo-table .todo-table-header{cursor:grab}
-    .task-card.type-todo-table .todo-table-header:active{cursor:grabbing}
-    .todo-table-grip{
-      cursor:grab;
-      color:rgba(255,255,255,0.45);
-      font-size:15px;
-      line-height:1;
-      padding:0 4px 0 0;
-      user-select:none;
-      -webkit-user-select:none;
-      display:flex;
-      align-items:center;
-      transition:color .15s;
-    }
-    .todo-table-grip:hover{color:#fff}
-    .todo-table-grip:active{cursor:grabbing}
-    .desplegable-badge{font-size:11px;color:rgba(24,28,34,.45);margin-left:auto;line-height:1;font-weight:700}
-    .color-neutral .desplegable-badge,.color-instagram .desplegable-badge,.color-web .desplegable-badge,.color-research .desplegable-badge{color:rgba(255,255,255,.65)}
-
-    /* Barra de clasificación en la nota de la semana (Idea 💡, Conexión 🔌, Acción 🎯) */
-    .note-stage-bar{display:inline-flex;align-items:center;gap:3px;margin-left:auto;background:rgba(255,255,255,.75);padding:2px 4px;border-radius:4px}
-    .note-stage-opt{border:0;background:transparent;padding:1px 3px;font-size:11px;cursor:pointer;opacity:.45;border-radius:3px;transition:all .12s;line-height:1;display:grid;place-items:center}
-    .note-stage-opt:hover{opacity:.9;background:rgba(0,0,0,.08)}
-    .note-stage-opt.active{opacity:1;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.18)}
-
-    /* Flujo Operativo estilo Trello: Ideas, Conexiones, Acciones */
-    .pipeline-section{
-      margin-left:72px;
-      margin-top:24px;
-      padding:22px 24px 26px;
-      background:#ffffff;
-      border:1px solid #e1e4e6;
-      border-radius:12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-    }
-    .pipeline-header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:18px;
-      flex-wrap:wrap;
-      gap:12px;
-    }
-    .pipeline-title-wrap h2{
-      margin:3px 0 0;
-      font-size:18px;
-      font-weight:800;
-      letter-spacing:-.4px;
-      color:#1e293b;
-    }
-    .pipeline-legend{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-size:11px;
-      font-weight:700;
-      color:#5a626d;
-      background:#f8fafc;
-      padding:6px 14px;
-      border-radius:20px;
-      border:1px solid #e2e8f0;
-    }
-    .pipeline-legend-item{display:flex;align-items:center;gap:5px}
-    .pipeline-legend-arrow{color:#94a3b8;font-size:13px}
-    .stage-ico{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:4px;font-style:normal;line-height:1;color:#111111}
-    .stage-ico.idea,.stage-ico.conexion,.stage-ico.accion{color:#111111}
-    .target-ico{width:16px;height:16px;display:block;color:#111111}
-
-    /* Columnas tipo Trello */
-    .pipeline-board{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-      align-items:stretch;
-    }
-    .pipeline-col{
-      background:#f1f3f5;
-      border:1px solid #e2e8f0;
-      border-radius:10px;
-      padding:12px;
-      min-height:280px;
-      display:flex;
-      flex-direction:column;
-      transition:background .15s ease, border-color .15s ease;
-    }
-    .pipeline-col-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:0 2px 10px;
-      border-bottom:1px solid #e2e8f0;
-      margin-bottom:10px;
-    }
-    .pipeline-col-head h3{
-      margin:0;
-      font-size:13px;
-      font-weight:800;
-      display:flex;
-      align-items:center;
-      gap:7px;
-      color:#1e293b;
-      letter-spacing:-0.2px;
-    }
-    .pipeline-count{
-      font:10px "DM Mono",monospace;
-      font-weight:700;
-      background:#e2e8f0;
-      color:#475569;
-      padding:2px 7px;
-      border-radius:10px;
-    }
-    .pipeline-add-btn{
-      border:1px solid #cbd5e1;
-      border-radius:6px;
-      background:#ffffff;
-      width:24px;
-      height:24px;
-      display:grid;
-      place-items:center;
-      font-size:15px;
-      cursor:pointer;
-      color:#475569;
-      padding:0;
-      line-height:1;
-      transition:all .15s;
-    }
-    .pipeline-add-btn:hover{
-      background:#3b82f6;
-      color:#ffffff;
-      border-color:#3b82f6;
-    }
-
-    /* Dropzone tipo Trello */
-    .pipeline-dropzone{
-      min-height:180px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      flex:1;
-      padding:4px 0;
-      border-radius:8px;
-      transition:background .15s ease, outline .15s ease;
-    }
-    .pipeline-dropzone.drag-over{
-      background:rgba(59, 130, 246, 0.08) !important;
-      outline:2px dashed #3b82f6;
-      outline-offset:-2px;
-    }
-
-    /* Tarjetas tipo Trello */
-    .pipeline-card{
-      background:#ffffff;
-      border:1px solid #e2e8f0;
-      border-radius:8px;
-      padding:10px 12px;
-      box-shadow:0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      cursor:grab;
-      user-select:none;
-      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease, opacity .15s ease;
-      position:relative;
-    }
-    .pipeline-card:hover{
-      transform:translateY(-2px);
-      box-shadow:0 4px 10px rgba(0,0,0,0.08);
-      border-color:#cbd5e1;
-    }
-    .pipeline-card:active{
-      cursor:grabbing;
-    }
-    .pipeline-card.is-dragging{
-      opacity:0.35;
-      transform:scale(0.98);
-      border:2px dashed #94a3b8;
-      box-shadow:none;
-    }
-    .pipeline-card-link-ico{
-      font-size:11px;
-      opacity:0.55;
-      display:inline-flex;
-      align-items:center;
-    }
-    .pipeline-card.has-linked-task:hover{
-      border-color:#93c5fd;
-    }
-
-    /* Badge/Píldora superior de la tarjeta según columna */
-    .pipeline-card-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:6px;
-    }
-    .pipeline-card-badge{
-      display:inline-flex;
-      align-items:center;
-      gap:5px;
-      font-size:10px;
-      font-weight:700;
-      text-transform:uppercase;
-      letter-spacing:0.4px;
-      padding:2px 8px;
-      border-radius:12px;
-      line-height:1.2;
-    }
-    .pipeline-card.stage-idea .pipeline-card-badge{
-      background:#fef3c7;
-      color:#b45309;
-      border:1px solid #fde68a;
-    }
-    .pipeline-card.stage-conexion .pipeline-card-badge{
-      background:#e0f2fe;
-      color:#0284c7;
-      border:1px solid #bae6fd;
-    }
-    .pipeline-card.stage-accion .pipeline-card-badge{
-      background:#fee2e2;
-      color:#b91c1c;
-      border:1px solid #fecaca;
-    }
-
-    .pipeline-card-del{
-      border:none;
-      background:transparent;
-      color:#94a3b8;
-      font-size:16px;
-      cursor:pointer;
-      padding:0;
-      width:18px;
-      height:18px;
-      line-height:1;
-      display:grid;
-      place-items:center;
-      border-radius:4px;
-      opacity:0;
-      transition:opacity .15s ease, color .15s ease, background .15s ease;
-    }
-    .pipeline-card:hover .pipeline-card-del{
-      opacity:1;
-    }
-    .pipeline-card-del:hover{
-      color:#ef4444;
-      background:#fee2e2;
-    }
-
-    /* Título de la tarjeta editable */
-    .pipeline-card-title{
-      font-family:"Manrope", system-ui, sans-serif;
-      font-size:13px;
-      font-weight:600;
-      color:#1e293b;
-      line-height:1.4;
-      word-break:break-word;
-      outline:none;
-      cursor:text;
-      border-radius:4px;
-      padding:2px 4px;
-      margin:-2px -4px;
-    }
-    .pipeline-card-title:focus{
-      background:#eff6ff;
-      box-shadow:0 0 0 1.5px #3b82f6;
-    }
-
-    /* Indicador de soltar en dropzone (línea azul estilo Trello) */
-    .pipeline-drop-indicator{
-      height:3px;
-      background:#3b82f6;
-      border-radius:2px;
-      box-shadow:0 0 6px rgba(59,130,246,0.5);
-      margin:2px 0;
-      pointer-events:none;
-      transition:all .1s ease;
-    }
-
-    /* Footer de columna: botón "+ Añadir una tarjeta" estilo Trello */
-    .pipeline-col-footer{
-      margin-top:8px;
-    }
-    .pipeline-open-composer{
-      width:100%;
-      text-align:left;
-      background:transparent;
-      border:none;
-      color:#64748b;
-      font-family:"Manrope", system-ui, sans-serif;
-      font-size:12px;
-      font-weight:700;
-      padding:7px 8px;
-      border-radius:6px;
-      cursor:pointer;
-      display:flex;
-      align-items:center;
-      gap:6px;
-      transition:background .15s, color .15s;
-    }
-    .pipeline-open-composer:hover{
-      background:#e2e8f0;
-      color:#1e293b;
-    }
-
-    /* Composer inline de tarjeta tipo Trello */
-    .pipeline-composer{
-      background:#ffffff;
-      border:1px solid #cbd5e1;
-      border-radius:8px;
-      padding:8px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.08);
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      margin-top:4px;
-    }
-    .pipeline-composer-input{
-      width:100%;
-      box-sizing:border-box;
-      border:1px solid #e2e8f0;
-      border-radius:6px;
-      padding:8px 10px;
-      font-family:"Manrope", system-ui, sans-serif;
-      font-size:13px;
-      color:#1e293b;
-      resize:none;
-      outline:none;
-      line-height:1.4;
-      background:#f8fafc;
-      transition:border-color .15s, background .15s;
-    }
-    .pipeline-composer-input:focus{
-      background:#ffffff;
-      border-color:#3b82f6;
-      box-shadow:0 0 0 2px rgba(59,130,246,0.15);
-    }
-    .pipeline-composer-actions{
-      display:flex;
-      align-items:center;
-      gap:6px;
-    }
-    .pipeline-btn-add{
-      background:#3b82f6;
-      color:#ffffff;
-      border:none;
-      border-radius:6px;
-      padding:6px 12px;
-      font-family:"Manrope", system-ui, sans-serif;
-      font-size:12px;
-      font-weight:700;
-      cursor:pointer;
-      transition:background .15s;
-    }
-    .pipeline-btn-add:hover{
-      background:#2563eb;
-    }
-    .pipeline-btn-cancel{
-      background:transparent;
-      border:none;
-      color:#64748b;
-      font-size:16px;
-      cursor:pointer;
-      padding:4px 8px;
-      border-radius:6px;
-      display:grid;
-      place-items:center;
-      transition:background .15s, color .15s;
-    }
-    .pipeline-btn-cancel:hover{
-      background:#f1f5f9;
-      color:#1e293b;
-    }
-
-    /* Estilos para el constructor y tarjeta de tabla To-do estilo Milanote */
-    .col-btn{border:1px solid #dadddf;border-radius:6px;background:#fff;padding:9px 4px;font-size:12px;font-weight:700;color:#555d67;cursor:pointer;transition:all .15s}
-    .col-btn:hover,.col-btn.active{background:#6178ec;color:#fff;border-color:#6178ec;box-shadow:0 2px 6px rgba(97,120,236,.25)}
-    .task-card.type-todo-table{
-      background: rgba(0, 0, 0, 0.50) !important;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      color: #fff !important;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 7px;
-      overflow: visible;
-      box-shadow: 0 4px 16px rgba(0,0,0,.22);
-      padding: 0;
-      position: relative;
-      flex-shrink: 0;
-      max-width: none;
-      font-family: "Manrope", system-ui, sans-serif !important;
-      transition: width .2s ease;
-      z-index: 2 !important;
-    }
-    .task-card.type-todo-table.span-1{ width: 100% !important; z-index: 2 !important; }
-    .task-card.type-todo-table.span-2{ width: calc(200% + 16px) !important; z-index: 2 !important; }
-    .task-card.type-todo-table.span-3{ width: calc(300% + 32px) !important; z-index: 2 !important; }
-
-    .task-card.type-todo-table:hover{ box-shadow: 0 6px 20px rgba(0,0,0,.30); }
-    .task-card.type-todo-table .card-resize-handle{
-      position: absolute; right: -4px; top: 0; bottom: 0; width: 12px; cursor: ew-resize; background: transparent; z-index: 10; border-right: 3px solid transparent; transition: all .15s;
-    }
-    .task-card.type-todo-table .card-resize-handle:hover,
-    .task-card.type-todo-table .card-resize-handle:active{
-      border-right-color: #6178ec; background: rgba(97,120,236,.25);
-    }
-    .todo-table-header{
-      background: rgba(0, 0, 0, 0.50) !important;
-      padding: 10px 10px 10px 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
-      gap: 6px;
-    }
-    .todo-table-title-wrap{ flex: 1; overflow: hidden; }
-    .todo-table-title{
-      margin: 0;
-      font-size: 13px;
-      font-weight: 800;
-      font-family: "Manrope", system-ui, sans-serif !important;
-      color: #fff !important;
-      letter-spacing: -.3px;
-      display: inline-block;
-      outline: none;
-      padding: 2px 4px;
-      border-radius: 3px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 100%;
-    }
-    .todo-table-title:focus{ background: rgba(255,255,255,.15); box-shadow: 0 0 0 1px #6178ec; }
-    .todo-table-header-actions{ display: flex; gap: 4px; align-items: center; flex-shrink: 0; }
-    
-    /* Selector de ancho para 1, 2 o 3 columnas (días) ultra-compacto */
-    .todo-table-span-picker{
-      display: inline-flex;
-      background: rgba(255,255,255,.08);
-      border-radius: 3px;
-      padding: 1px;
-      gap: 1px;
-    }
-    .todo-span-btn{
-      border: 0;
-      background: transparent;
-      color: rgba(255,255,255,.6);
-      font-size: 8px;
-      font-weight: 800;
-      font-family: "DM Mono", monospace;
-      padding: 1px 3px;
-      height: 14px;
-      line-height: 12px;
-      border-radius: 2px;
-      cursor: pointer;
-      transition: all .12s;
-    }
-    .todo-span-btn:hover{ color: #fff; background: rgba(255,255,255,.14); }
-    .todo-span-btn.active{
-      color: #fff;
-      background: rgba(255, 255, 255, 0.22); /* gris sutil / neutro 10% menos que el fondo, no de otro color */
-      box-shadow: 0 1px 2px rgba(0,0,0,.25);
-    }
-
-    .todo-table-add-row, .todo-table-remove-row{
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 3px;
-      background: rgba(255,255,255,.08);
-      color: #fff;
-      width: 17px;
-      height: 17px;
-      font-size: 11px;
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      line-height: 1;
-      padding: 0;
-      transition: all .12s;
-    }
-    .todo-table-add-row:hover{ background: #6178ec; border-color: #6178ec; }
-    .todo-table-remove-row:hover{ background: #e02424; border-color: #e02424; }
-
-    /* Cabeceras de columnas */
-    .todo-table-columns{
-      background: rgba(0, 0, 0, 0.55) !important;
-      color: #fff !important;
-      display: grid;
-      padding: 6px 8px;
-      font-size: 11px;
-      font-weight: 700;
-      font-family: "Manrope", system-ui, sans-serif !important;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
-      gap: 6px;
-      align-items: center;
-    }
-    .todo-th{ outline: none; padding: 2px 2px; border-radius: 3px; color: #fff !important; font-family: "Manrope", system-ui, sans-serif !important; }
-    .todo-th:focus{ background: rgba(255,255,255,.15); box-shadow: 0 0 0 1px #6178ec; }
-    .todo-th.col-check{ width: 15px; }
-
-    /* Línea de items / filas en negro al 50% */
-    .todo-table-body{ display: flex; flex-direction: column; }
-    .todo-table-row{
-      display: grid;
-      padding: 6px 8px;
-      font-size: 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      gap: 6px;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.50) !important;
-      color: #fff !important;
-      position: relative;
-      font-family: "Manrope", system-ui, sans-serif !important;
-      transition: background .12s;
-    }
-    .todo-table-row:nth-child(even){ background: rgba(0, 0, 0, 0.50) !important; }
-    .todo-table-row:hover{ background: rgba(0, 0, 0, 0.65) !important; }
-
-    /* Casilla de verificación compacta */
-    .todo-td.col-check{ width: 15px; display: grid; place-items: center; }
-    .todo-table-check{
-      appearance: none;
-      width: 13px;
-      height: 13px;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      border-radius: 3px;
-      background: rgba(255, 255, 255, 0.08);
-      cursor: pointer;
-      margin: 0;
-      display: grid;
-      place-items: center;
-      outline: none;
-      transition: all .12s;
-    }
-    .todo-table-check:checked{
-      background: #465467;
-      border-color: #6a7b94;
-    }
-    .todo-table-check:checked:after{
-      content: "✓";
-      color: #fff;
-      font-size: 9px;
-      font-weight: 800;
-      line-height: 1;
-    }
-
-    .todo-table-row.row-checked .todo-td:not(.col-check){
-      color: rgba(255,255,255,.45) !important;
-      text-decoration: line-through;
-    }
-    .todo-td[contenteditable="true"]{
-      outline: none;
-      padding: 2px 2px;
-      border-radius: 3px;
-      color: #ffffff !important;
-      font-family: "Manrope", system-ui, sans-serif !important;
-    }
-    .todo-td[contenteditable="true"]:focus{
-      background: rgba(255,255,255,.15);
-      box-shadow: 0 0 0 1px #6178ec;
-      color: #fff !important;
-    }
-    .col-align-right{ text-align: right; }
-
-    /* Botón de borrar fila */
-    .todo-table-del-row{
-      position: absolute;
-      right: 2px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: transparent;
-      border: 0;
-      color: rgba(255,255,255,.35);
-      font-size: 14px;
-      line-height: 1;
-      padding: 2px 4px;
-      border-radius: 3px;
-      cursor: pointer;
-      opacity: 0;
-      transition: all .12s;
-    }
-    .todo-table-row:hover .todo-table-del-row{ opacity: 1; }
-    .todo-table-del-row:hover{
-      color: #ff5252;
-      background: rgba(255,82,82,.2);
-    }
-
-    /* Pie de tabla / Total */
-    .todo-table-footer{
-      background: rgba(0, 0, 0, 0.55) !important;
-      display: grid;
-      padding: 7px 8px;
-      font-size: 12px;
-      font-weight: 800;
-      color: #fff !important;
-      border-top: 1px solid rgba(255, 255, 255, 0.14);
-      gap: 6px;
-      align-items: center;
-      font-family: "Manrope", system-ui, sans-serif !important;
-    }
-    .todo-total-val{
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: .2px;
-      color: #ffffff !important;
-      font-family: "Manrope", system-ui, sans-serif !important;
-    }
-
-    @media (max-width:1120px){
-      .app-shell{padding:0 14px 42px}
-      .topbar{margin:0 -14px;padding:0 14px}
-      .header-controls-row,.toolbar{margin-left:64px;gap:12px}
-      .channels{margin-left:0}
-      .maker-strip{width:64px;top:76px;padding:8px 3px}
-      .maker-tool,.upload-piece,.trash-tool{width:50px}
-      .week-board{margin-left:64px;grid-template-columns:repeat(6,minmax(145px,1fr));padding:16px 12px;gap:10px}
-    }
-    @media (max-width:680px){
-      .maker-strip{display:none}
-      .header-controls-row,.toolbar,.channels,.week-board{margin-left:0}
-    }
-  </style>
-  <style>
-    .week-board{position:relative}.free-notes{position:absolute;inset:0;pointer-events:none;z-index:50!important}.floating-note{position:absolute;width:190px;min-height:105px;padding:15px;border-radius:4px;box-shadow:0 5px 15px rgba(31,38,44,.17);cursor:grab;pointer-events:auto;z-index:55!important}.floating-note button{border:0;background:transparent;color:inherit;padding:0 0 8px;font-size:14px}.floating-note strong{display:block;font-size:14px}.floating-note p{font-size:11px;line-height:1.35;margin:6px 0 0}.asset-file{margin-top:10px;padding:12px;display:flex;gap:11px;align-items:center;background:rgba(255,255,255,.84);color:#273140}.asset-file b{width:38px;height:45px;display:grid;place-items:center;background:#e9edf0;color:#46515d;text-transform:lowercase;font-size:12px}.asset-file.asset-pdf b{background:#ef3e3e;color:#fff;font-size:15px}.asset-file strong,.asset-file span{display:block}.asset-file strong{font-size:12px}.asset-file span{font-size:10px;opacity:.7;margin-top:3px}.card-video{display:block;width:100%;height:148px;object-fit:cover;background:#17191c}.video-thumb{position:relative}.video-thumb .card-image{height:172px;object-fit:cover}.video-thumb span{position:absolute;left:14px;bottom:13px;display:grid;place-items:center;width:34px;height:24px;border-radius:6px;background:#ff1f1f;color:#fff;font-size:13px}.video-placeholder{height:145px;display:grid;place-items:center;background:#222;color:#fff;font-size:30px}.media-link{display:block;padding:10px 12px;color:inherit;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none}.media-link b{color:#ff1f1f}.audio-piece{display:flex;gap:10px;padding:13px;background:rgba(255,255,255,.34)}.audio-piece>span{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:currentColor;color:transparent}.audio-piece strong{display:block;font-size:11px;margin-bottom:6px}.audio-piece audio{width:100%;height:28px}.task-card.link-bookmark-card,.link-bookmark-card{align-self:center!important;margin:6px auto!important;width:fit-content!important;min-width:80px!important;max-width:152px!important;background:transparent!important;border:1px solid transparent!important;box-shadow:none!important;padding:4px 6px!important;border-radius:12px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;cursor:grab!important;transition:transform .18s cubic-bezier(0.2,0.8,0.2,1),background .18s ease,border-color .18s ease!important;position:relative!important;overflow:visible!important}.link-bookmark-card:hover{background:rgba(255,255,255,.9)!important;border-color:#e2e8f0!important;box-shadow:0 4px 14px rgba(0,0,0,.06)!important;transform:translateY(-2px)!important}.link-bookmark-card:active{cursor:grabbing!important}.link-squircle{width:50px;height:50px;border-radius:14px;background:#fff;border:1px solid rgba(0,0,0,.08);box-shadow:0 3px 10px rgba(0,0,0,.07);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform .18s ease,box-shadow .18s ease;position:relative;flex-shrink:0}.link-bookmark-card:hover .link-squircle{box-shadow:0 6px 16px rgba(0,0,0,.12);transform:scale(1.05)}.link-favicon{width:28px;height:28px;object-fit:contain;border-radius:4px;display:block}.link-neutral-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#244b7d 0%,#173256 100%);color:#fff}.link-neutral-fallback svg{width:22px;height:22px;stroke:#fff}.link-info{margin-top:6px;display:flex;flex-direction:column;align-items:center;gap:1px;max-width:146px}.link-title{font-family:"Manrope",system-ui,sans-serif!important;font-size:8.5px!important;font-weight:700!important;color:#1e293b!important;line-height:1.25!important;text-align:center!important;max-width:144px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;display:block!important}.link-subtitle{font-family:"DM Mono",monospace!important;font-size:7px!important;font-weight:600!important;color:#94a3b8!important;text-align:center!important;max-width:144px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;display:block!important}.link-del-btn{position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;border:0;padding:0;display:none;place-items:center;font-size:12px;line-height:1;cursor:pointer;z-index:5}.link-bookmark-card:hover .link-del-btn{display:grid}.link-del-btn:hover{background:#dc2626}.meeting-identity{margin-top:10px}.meeting-identity strong,.meeting-identity span{display:block}.meeting-identity strong{font-size:12px}.meeting-identity span{font-size:10px;margin-top:3px}.detail-person-image{display:block;width:calc(100% + 56px);height:220px;object-fit:cover;margin:-25px -28px 22px}.capture-dialog::backdrop{background:rgba(27,31,38,.24);backdrop-filter:blur(2px)}
-  </style>
-  <style>
-    .new-week{border:1px solid #d6dade;border-radius:5px;background:#fff;color:#535d69;padding:9px 12px;font-size:12px;font-weight:700}.new-week span{font-size:16px;margin-right:4px}.week-note{font-size:12px;line-height:1.45;color:#747b84;margin:15px 0 0}.task-dialog-actions button[value="default"]{background:#6178ec;color:#fff}
-  </style>
-  <style>
-    /* Pieza de video estilo Milanote: miniatura limpia con círculo play central, link con icono YouTube y título en 2 líneas máximo */
-    .task-card.type-video{width:100%;background:#fff!important;color:#30333b!important}
-    .type-video .video-thumb{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:#eceeef}
-    .type-video .video-thumb .card-image{display:block;width:100%!important;height:100%!important;min-height:0!important;object-fit:cover;object-position:center}
-    .type-video .video-thumb .video-play-circle{position:absolute!important;left:50%!important;top:50%!important;bottom:auto!important;transform:translate(-50%,-50%)!important;width:44px!important;height:44px!important;border-radius:50%!important;background:rgba(20,22,25,0.68)!important;backdrop-filter:blur(2px);display:flex!important;align-items:center!important;justify-content:center!important;padding-left:2px;box-sizing:border-box;transition:transform .18s ease,background .18s ease}
-    .type-video:hover .video-thumb .video-play-circle{background:rgba(20,22,25,0.84)!important;transform:translate(-50%,-50%) scale(1.06)!important}
-    .type-video .video-card-body{padding:8px 10px 10px!important;display:flex!important;flex-direction:column!important;gap:4px!important;text-align:left!important;background:#fff!important}
-    .type-video .media-link{display:flex!important;align-items:center!important;gap:6px!important;padding:0!important;margin:0!important;color:#94a3b8!important;font:500 8.5px/1.2 "Manrope",system-ui,sans-serif!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;cursor:pointer!important}
-    .type-video .media-link span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
-    .type-video .video-card-title{display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;text-overflow:ellipsis!important;color:#f04e23!important;font:700 7px/1.3 "Manrope",system-ui,sans-serif!important;font-size:7px!important;text-decoration:none!important;margin:0!important;text-align:left!important;word-break:break-word!important;cursor:grab!important}
-    .type-video .video-card-title:hover{text-decoration:underline!important}
-    .type-video .card-copy,.type-video p,.type-video .card-footer,.type-video .check,.type-video .card-amount,.type-video .card-resize{display:none!important}
-  </style>
-  <style>
-    .highlight-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .capture-field select{display:block;width:100%;margin-top:7px;border:1px solid #dadddf;border-radius:7px;padding:10px;background:#fff;font:13px Manrope,sans-serif}
-
-    /* NOTAS DESTACADAS (FLOATING NOTES) CON CONTROL TOTAL - STICKERS POR SOBRE TODO */
-    .week-board{position:relative}
-    .free-notes{position:absolute;inset:0;pointer-events:none;z-index:50!important}
-    .floating-note{
-      position:absolute;
-      width:var(--note-width, 280px)!important;
-      height:var(--note-height, auto)!important;
-      min-width:60px;
-      min-height:40px;
-      padding:20px 22px!important;
-      border-radius:6px;
-      box-shadow:0 8px 24px rgba(0,0,0,.18);
-      cursor:grab;
-      pointer-events:auto;
-      z-index:55!important;
-      box-sizing:border-box;
-      touch-action:none;
-      overflow:visible;
-      user-select:none;
-      transition:box-shadow .15s;
-      display:flex!important;
-      flex-direction:column!important;
-      justify-content:center!important;
-    }
-    .floating-note.is-dragging{
-      cursor:grabbing!important;
-      z-index:80!important;
-      box-shadow:0 16px 36px rgba(0,0,0,.32)!important;
-    }
-    /* El color de texto seleccionado se aplica solo a las notas destacadas, no a archivos ni ubicaciones ni links */
-    .floating-note:not(.floating-file):not(.floating-location):not(.floating-link),
-    .floating-note:not(.floating-file):not(.floating-location):not(.floating-link) *,
-    .floating-note:not(.floating-file):not(.floating-location):not(.floating-link) strong,
-    .floating-note:not(.floating-file):not(.floating-location):not(.floating-link) p,
-    .floating-note:not(.floating-file):not(.floating-location):not(.floating-link) button{
-      color:inherit!important;
-    }
-    .floating-note-body{
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      width:100%;
-      margin:auto 0;
-      text-align:left!important;
-    }
-    .floating-note:not(.floating-file):not(.floating-location):not(.floating-link) strong,
-    .floating-note-title{
-      display:block;
-      font-size:14px;
-      font-weight:700;
-      line-height:1.3;
-      padding-right:0!important;
-      margin:0;
-      word-break:break-word;
-      white-space:pre-wrap;
-      user-select:text;
-      text-align:left!important;
-    }
-    .floating-note:not(.floating-file):not(.floating-location):not(.floating-link) p,
-    .floating-note-desc{
-      font-size:12px;
-      line-height:1.4;
-      margin:6px 0 0!important;
-      padding:0!important;
-      word-break:break-word;
-      white-space:pre-wrap;
-      user-select:text;
-      text-align:left!important;
-    }
-    .floating-note p:empty,
-    .floating-note-desc:empty{
-      display:none!important;
-    }
-    .floating-note .floating-move{
-      position:absolute;
-      left:10px;
-      top:10px;
-      border:0;
-      background:transparent;
-      font-size:13px;
-      cursor:grab;
-      padding:0;
-      opacity:.6;
-    }
-    .floating-note .floating-edit{
-      position:absolute;
-      right:28px;
-      top:8px;
-      border:0;
-      background:transparent;
-      font-size:14px;
-      cursor:pointer;
-      padding:0;
-      opacity:.6;
-      transition:opacity .15s;
-    }
-    .floating-note .floating-del{
-      position:absolute;
-      right:8px;
-      top:7px;
-      border:0;
-      background:transparent;
-      font-size:17px;
-      line-height:1;
-      font-weight:700;
-      cursor:pointer;
-      padding:0;
-      opacity:.6;
-      transition:opacity .15s;
-    }
-    .floating-note .floating-edit:hover,
-    .floating-note .floating-del:hover,
-    .floating-note .floating-move:hover{
-      opacity:1;
-    }
-
-    /* Resize handles con máxima libertad */
-    .task-card{min-height:0;overflow:visible;border-radius:10px!important}.task-card .card-image{border-radius:10px 10px 0 0}.task-card .card-copy{overflow-wrap:anywhere}
-    .resize-handle{
-      position:absolute;
-      width:11px;
-      height:11px;
-      border:1.5px solid #ffffff;
-      border-radius:2px;
-      background:currentColor;
-      box-shadow:0 1px 4px rgba(0,0,0,.35);
-      z-index:20;
-      opacity:0;
-      touch-action:none;
-      transition:opacity .15s,transform .12s;
-    }
-    .floating-note:hover .resize-handle{
-      opacity:.85;
-    }
-    .resize-handle:hover{
-      opacity:1!important;
-      transform:scale(1.25);
-    }
-    .resize-handle.nw{top:-5px;left:-5px;cursor:nwse-resize}
-    .resize-handle.ne{top:-5px;right:-5px;cursor:nesw-resize}
-    .resize-handle.sw{bottom:-5px;left:-5px;cursor:nesw-resize}
-    .resize-handle.se{right:-5px;bottom:-5px;cursor:nwse-resize}
-    .resize-handle.e{top:calc(50% - 5px);right:-5px;cursor:ew-resize}
-    .resize-handle.s{bottom:-5px;left:calc(50% - 5px);cursor:ns-resize}
-
-    /* Tarjetas de imagen con control interactivo de alto */
-    .task-card.image-only{background:transparent;border:0;box-shadow:none;overflow:visible;position:relative;min-height:50px}
-    .task-card.image-only:hover{transform:none;box-shadow:none}
-    .image-card-box{position:relative;width:100%;border-radius:6px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.12);background:#f0f2f5;transition:box-shadow .15s}
-    .image-card-box:hover{box-shadow:0 4px 16px rgba(0,0,0,.22)}
-    .image-card-box .card-image{display:block;width:100%!important;border-radius:6px;user-select:none;-webkit-user-drag:none}
-    .image-height-grip{position:absolute;left:0;right:0;bottom:0;height:20px;background:linear-gradient(to bottom,transparent,rgba(0,0,0,.55));cursor:ns-resize;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;z-index:10;touch-action:none}
-    .image-card-box:hover .image-height-grip{opacity:1}
-    .image-grip-line{width:38px;height:4px;border-radius:2px;background:rgba(255,255,255,.92);box-shadow:0 1px 3px rgba(0,0,0,.45)}
-    .image-del-btn{position:absolute;top:6px;right:6px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;font-size:16px;line-height:1;display:grid;place-items:center;cursor:pointer;opacity:0;transition:opacity .15s,background .15s;z-index:11}
-    .image-card-box:hover .image-del-btn{opacity:.85}
-    .image-del-btn:hover{opacity:1!important;background:#ef4444!important}
-
-    /* Herramienta de Trazo / Apple Pencil (100% inactiva salvo cuando se activa en la barra lateral) */
-    .maker-tool.is-active-tool {
-      background: #111111 !important;
-      color: #ffffff !important;
-      border-radius: 8px;
-    }
-    .maker-tool.is-active-tool b,
-    .maker-tool.is-active-tool span,
-    .maker-tool.is-active-tool svg {
-      color: #ffffff !important;
-      stroke: #ffffff !important;
-    }
-    #mindFerDrawCanvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 25;
-      pointer-events: none !important;
-      touch-action: auto;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-    #mindFerDrawCanvas.draw-mode-enabled {
-      z-index: 85 !important;
-      pointer-events: auto !important;
-      touch-action: none !important;
-      cursor: crosshair;
-    }
-    .draw-floating-toolbar {
-      position: fixed;
-      bottom: 22px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1200;
-      background: #ffffff;
-      border: 1px solid #d1d5db;
-      border-radius: 999px;
-      padding: 6px 12px;
-      display: none;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.16);
-      user-select: none;
-      -webkit-user-select: none;
-    }
-    .draw-floating-toolbar.visible {
-      display: flex !important;
-    }
-    .draw-tool-btn {
-      border: 1px solid transparent;
-      background: transparent;
-      color: #111111;
-      height: 30px;
-      padding: 0 8px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-    .draw-mode-group {
-      display: inline-flex;
-      align-items: center;
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 2px;
-      gap: 2px;
-    }
-    .draw-tool-btn.micro-btn {
-      width: 26px;
-      height: 26px;
-      padding: 0;
-      border-radius: 5px;
-      font-size: 0;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #334155;
-    }
-    .draw-tool-btn.micro-btn:hover {
-      background: #e2e8f0;
-      color: #0f172a;
-    }
-    .draw-tool-btn.micro-btn.active {
-      background: #111111;
-      color: #ffffff;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    }
-    .draw-tool-btn.micro-btn.active svg {
-      stroke: #ffffff;
-    }
-    .draw-color-dot {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border: 2px solid #ffffff;
-      box-shadow: 0 0 0 1px #cbd5e1;
-      cursor: pointer;
-      padding: 0;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-    .draw-color-dot.active {
-      transform: scale(1.18);
-      box-shadow: 0 0 0 2px #111111;
-    }
-    .draw-sep {
-      width: 1px;
-      height: 18px;
-      background: #e2e8f0;
-      margin: 0 2px;
-    }
-    .draw-exit-btn {
-      background: #111111;
-      color: #ffffff;
-      border: none;
-      height: 30px;
-      padding: 0 12px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    /* Controles Deshacer / Rehacer estilo Canva en la barra superior */
-    .history-control-group {
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-      background: #f8fafc;
-      border: 1px solid #cbd5e1;
-      border-radius: 999px;
-      padding: 2px 4px;
-    }
-    .history-btn {
-      width: 30px;
-      height: 30px;
-      border: 1px solid transparent;
-      border-radius: 50%;
-      background: #ffffff;
-      color: #0f172a;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      cursor: pointer;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
-      transition: background 0.15s ease, transform 0.12s ease, opacity 0.15s ease, border-color 0.15s ease;
-    }
-    .history-btn:hover {
-      background: #f1f5f9;
-      border-color: #94a3b8;
-      transform: translateY(-1px);
-    }
-    .history-btn:active {
-      transform: translateY(0);
-    }
-
-    /* LINKS, UBICACIÓN Y ARCHIVOS: SIN BORDE, PEQUEÑO, TIPOGRAFÍA EN 6, CENTRADO EN LA CUADRÍCULA */
-    .task-card.grid-icon-card {
-      width: 100% !important;
-      max-width: 100% !important;
-      min-width: 0 !important;
-      margin: 4px auto !important;
-      padding: 4px 2px !important;
-      background: transparent !important;
-      border: none !important;
-      outline: none !important;
-      box-shadow: none !important;
-      border-radius: 8px !important;
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      justify-content: center !important;
-      text-align: center !important;
-      box-sizing: border-box !important;
-      cursor: grab !important;
-      position: relative !important;
-      overflow: visible !important;
-      min-height: auto !important;
-      transition: transform 0.15s ease !important;
-    }
-    .task-card.grid-icon-card:hover {
-      transform: translateY(-1px) !important;
-      background: rgba(0, 0, 0, 0.02) !important;
-      box-shadow: none !important;
-      border: none !important;
-    }
-    .task-card.grid-icon-card:active {
-      cursor: grabbing !important;
-    }
-
-    /* ÍCONO PEQUEÑO SQUIRCLE SIN BORDES PESADOS */
-    .task-card.grid-icon-card .unified-squircle-box {
-      width: 36px !important;
-      height: 36px !important;
-      min-width: 36px !important;
-      min-height: 36px !important;
-      border-radius: 10px !important;
-      background: #ffffff !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05) !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      margin: 0 auto 4px auto !important;
-      flex-shrink: 0 !important;
-      overflow: hidden !important;
-      box-sizing: border-box !important;
-    }
-    .task-card.grid-icon-card .unified-squircle-img {
-      width: 20px !important;
-      height: 20px !important;
-      object-fit: contain !important;
-      display: block !important;
-      pointer-events: none !important;
-    }
-
-    .task-card.grid-icon-card .unified-icon-info {
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-      align-items: center !important;
-      min-width: 0 !important;
-      width: 100% !important;
-      gap: 1px !important;
-      overflow: hidden !important;
-      text-align: center !important;
-      box-sizing: border-box !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-    .task-card.grid-icon-card .unified-icon-title {
-      font-family: "Manrope", system-ui, sans-serif !important;
-      font-size: 6px !important;
-      font-weight: 700 !important;
-      color: #1e293b !important;
-      line-height: 1.2 !important;
-      text-align: center !important;
-      width: 100% !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-      display: block !important;
-      margin: 0 !important;
-    }
-    .task-card.grid-icon-card .unified-icon-meta {
-      font-family: "DM Mono", monospace !important;
-      font-size: 6px !important;
-      font-weight: 500 !important;
-      color: #94a3b8 !important;
-      line-height: 1.2 !important;
-      text-align: center !important;
-      width: 100% !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-      display: block !important;
-      margin: 0 !important;
-    }
-
-    /* FORMATO 2: VOZ / AUDIO (Fila horizontal elegante estilo Milanote con icono de documento y nota musical) */
-    .task-card.type-audio.audio-card-row {
-      width: 100% !important;
-      max-width: 100% !important;
-      min-width: 0 !important;
-      margin: 4px 0 !important;
-      padding: 9px 12px !important;
-      background: #ffffff !important;
-      border: 1.5px solid #edf0f3 !important;
-      border-radius: 8px !important;
-      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04) !important;
-      display: flex !important;
-      flex-direction: row !important;
-      align-items: center !important;
-      justify-content: flex-start !important;
-      gap: 12px !important;
-      text-align: left !important;
-      box-sizing: border-box !important;
-      cursor: grab !important;
-      position: relative !important;
-      overflow: hidden !important;
-      min-height: 52px !important;
-      transition: transform 0.15s ease, box-shadow 0.15s ease !important;
-    }
-    .task-card.type-audio.audio-card-row:hover {
-      transform: translateY(-1px) !important;
-      box-shadow: 0 3px 8px rgba(15, 23, 42, 0.08) !important;
-    }
-    .task-card.type-audio.audio-card-row:active {
-      cursor: grabbing !important;
-    }
-    .task-card.type-audio.audio-card-row .audio-doc-box {
-      width: 26px !important;
-      height: 30px !important;
-      flex-shrink: 0 !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-    }
-    .task-card.type-audio.audio-card-row .audio-card-info {
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-      align-items: flex-start !important;
-      min-width: 0 !important;
-      flex: 1 !important;
-      gap: 2px !important;
-      overflow: hidden !important;
-      text-align: left !important;
-      box-sizing: border-box !important;
-    }
-    .task-card.type-audio.audio-card-row .audio-card-title {
-      font-family: "Manrope", system-ui, sans-serif !important;
-      font-size: 11px !important;
-      font-weight: 700 !important;
-      color: #1e293b !important;
-      line-height: 1.25 !important;
-      text-align: left !important;
-      width: 100% !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-      display: block !important;
-      margin: 0 !important;
-    }
-    .task-card.type-audio.audio-card-row .audio-card-meta {
-      font-family: "Manrope", system-ui, sans-serif !important;
-      font-size: 8.5px !important;
-      font-weight: 500 !important;
-      color: #64748b !important;
-      line-height: 1.2 !important;
-      text-align: left !important;
-      width: 100% !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-      display: block !important;
-      margin: 0 !important;
-      text-decoration: underline !important;
-      cursor: pointer !important;
-    }
-
-    .task-card.is-dragging-card {
-      user-select: none !important;
-      -webkit-user-select: none !important;
-      transition: none !important;
-      will-change: transform;
-      opacity: 0.94 !important;
-      cursor: grabbing !important;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Hoja de estilos JSP Seguros -->
+  <link rel="stylesheet" href="jsp-styles.css?v=1.0" />
 </head>
 <body>
-  <main class="app-shell">
-    <div class="sticky-header">
-      <header class="topbar">
-        <a class="brand" href="#" aria-label="MindJeanette, inicio"><img class="brand-mark" src="brand-icon.png?v=2" alt="Logo MindJeanette"><span id="brandNameText">Mind<b>Jeanette</b></span></a>
-        <div class="week-control"><button id="prevWeek" aria-label="Semana anterior">←</button><div><span class="eyebrow">SEMANA</span><strong id="weekRange" aria-live="polite"></strong></div><button id="nextWeek" aria-label="Semana siguiente">→</button></div>
-        <div class="header-actions" style="position:relative">
-          <div class="history-control-group" role="group" aria-label="Deshacer y rehacer cambios">
-            <button type="button" id="btnUndo" class="history-btn" title="Volver atrás / Deshacer (⌘Z)" aria-label="Volver atrás">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"/></svg>
-            </button>
-            <button type="button" id="btnRedo" class="history-btn" title="Adelante / Rehacer (⇧⌘Z)" aria-label="Adelante">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5A5.5 5.5 0 0 0 4 14.5v0A5.5 5.5 0 0 0 9.5 20H13"/></svg>
-            </button>
+
+  <!-- ======================================================================
+       HEADER / BARRA DE NAVEGACIÓN
+       ====================================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="brand-wrapper" aria-label="JSP Seguros Inicio">
+        <img src="brand-icon.png" alt="Logo JSP Seguros" class="brand-avatar" onerror="this.style.display='none'" />
+        <div>
+          <div class="brand-title">
+            JSP Seguros
+            <span class="brand-badge">CMF Chile</span>
           </div>
-          <button type="button" id="btnManualSave" class="manual-save-btn" title="Guardar cambios ahora mismo" style="display:inline-flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:999px;padding:3px 12px;height:34px;box-sizing:border-box;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;color:#0f172a;cursor:pointer;transition:all .18s ease;box-shadow:0 1px 3px rgba(0,0,0,0.04)">
-            <span id="saveStatusDot" style="width:7px;height:7px;border-radius:50%;background:#16a34a;display:inline-block"></span>
-            <span id="saveStatusLabel">Guardar</span>
-          </button>
-          <div id="headerSearchWrap" style="position:relative;display:inline-flex;align-items:center">
-            <div id="headerSearchBox" style="display:none;align-items:center;gap:6px;background:#ffffff;border:1px solid #cbd5e1;border-radius:999px;padding:3px 10px;height:34px;box-sizing:border-box;box-shadow:0 4px 14px rgba(15,23,42,0.08);margin-right:6px">
-              <span style="font-size:13px;color:#64748b;line-height:1">⌕</span>
-              <input type="search" id="headerSearchInput" placeholder="Buscar notas, reuniones, links, tareas…" autocomplete="off" style="border:0;outline:none;background:transparent;font-size:12px;color:#0f172a;width:210px;font-family:inherit">
-              <button type="button" id="btnClearHeaderSearch" title="Cerrar búsqueda (Esc)" style="border:0;background:transparent;color:#94a3b8;font-size:14px;font-weight:700;cursor:pointer;padding:0 2px;line-height:1">×</button>
+          <div class="brand-subtitle" data-i18n="brand_sub">Corredora Oficial · Jeanette Salinas Ponce</div>
+        </div>
+      </a>
+
+      <!-- Enlaces de navegación -->
+      <nav aria-label="Navegación principal">
+        <ul class="nav-links">
+          <li><a href="#servicios" class="nav-link" data-i18n="nav_services">Seguros</a></li>
+          <li><a href="#viajeros" class="nav-link" data-i18n="nav_travelers">Viajeros & SOAPEX</a></li>
+          <li><a href="#metodo" class="nav-link" data-i18n="nav_method">Cómo te ayudo</a></li>
+          <li><a href="#alianzas" class="nav-link" data-i18n="nav_alliances">Alianzas B2B</a></li>
+        </ul>
+      </nav>
+
+      <!-- Acciones: Selector de Idioma (ES / EN) y Botón Asesoría -->
+      <div class="nav-actions">
+        <div class="lang-switcher" aria-label="Cambiar idioma">
+          <button id="lang-es" class="lang-btn active" aria-label="Español">ES</button>
+          <button id="lang-en" class="lang-btn" aria-label="English">EN</button>
+        </div>
+
+        <button class="btn btn-primary btn-sm" data-open-modal data-subject="Asesoría General" data-i18n="nav_cta">
+          Asesoría Gratuita
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       HERO SECTION (Alan + Luko Style)
+       ====================================================================== -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        
+        <!-- Columna Izquierda: Mensaje Fiduciario y CTAs -->
+        <div class="hero-content">
+          <div class="hero-badge-tag">
+            <span class="hero-badge-dot"></span>
+            <span data-i18n="hero_tag">Corredora Oficial de Seguros · Jeanette Salinas Ponce</span>
+          </div>
+
+          <h1 class="hero-title" data-i18n="hero_title">
+            Tu tranquilidad asegurada. <br>
+            <span class="highlight">Yo gestiono por ti.</span>
+          </h1>
+
+          <p class="hero-description" data-i18n="hero_desc">
+            Asesoría fiduciaria e independiente para personas, familias, empresas y viajeros de todo el mundo. Evaluamos tus coberturas, encontramos la mejor opción del mercado y te defendemos en caso de siniestro.
+          </p>
+
+          <div class="hero-ctas">
+            <button class="btn btn-primary" data-open-modal data-subject="Asesoría General" data-i18n="hero_btn_primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              Solicitar Asesoría Gratuita
+            </button>
+
+            <a href="#viajeros" class="btn btn-secondary" data-i18n="hero_btn_soapex">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              Cotizar SOAPEX / RCI
+            </a>
+
+            <a href="#" class="btn btn-whatsapp-outline" id="hero-wa-btn" aria-label="WhatsApp directo con Jeanette">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+              WhatsApp Directo
+            </a>
+          </div>
+
+          <div class="hero-trust-row">
+            <div class="trust-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span data-i18n="hero_trust_1">Registro CMF Oficial</span>
             </div>
-            <button type="button" id="btnHeaderSearch" class="icon-button" title="Buscar en toda tu agenda (⌘K)" aria-label="Buscar">⌕</button>
-            <div id="headerSearchResults" style="display:none;position:absolute;top:42px;right:0;width:340px;max-height:380px;overflow-y:auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 16px 38px rgba(15,23,42,0.16);z-index:99999;padding:6px"></div>
+            <div class="trust-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span data-i18n="hero_trust_2">100% Independiente</span>
+            </div>
+            <div class="trust-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span data-i18n="hero_trust_3">Sin costo extra para ti</span>
+            </div>
           </div>
-          <button class="avatar" id="userAvatarBtn" aria-label="Perfil de usuario">J</button>
         </div>
-      </header>
 
-      <div class="motivation-bar-wrapper" id="motivationBarWrapper">
-        <div id="motivationWidget" class="motivation-widget"></div>
-      </div>
+        <!-- Columna Derecha: Tarjeta de Jeanette Salinas Ponce -->
+        <div class="hero-card">
+          <div class="hero-card-pattern"></div>
+          
+          <div class="profile-header">
+            <img src="brand-icon.png" alt="Jeanette Salinas Ponce" class="profile-avatar-large" />
+            <div class="profile-info">
+              <h3 data-i18n="profile_name">Jeanette Salinas Ponce</h3>
+              <p data-i18n="profile_role">Corredora Oficial de Seguros</p>
+              <div class="profile-cmf-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5zm-2 16l-4-4 1.41-1.41L10 15.17l6.59-6.59L18 10l-8 8z"/></svg>
+                <span data-i18n="profile_badge">Registro CMF Verificado</span>
+              </div>
+            </div>
+          </div>
 
-      <div class="header-controls-row" aria-label="Proyectos y Temas">
-        <div class="project-picker"><span class="eyebrow">PROYECTOS</span><select id="projectSelect" aria-label="Seleccionar proyecto"><option value="Todos" selected>Todos los proyectos</option><option value="NetThinking">NetThinking</option><option value="Personal Branding">Personal Branding</option><option value="Branding Corporativo">Branding Corporativo</option></select><button id="addProject" class="add-project" aria-label="Agregar proyecto">+</button></div>
-        <div class="controls-divider" aria-hidden="true"></div>
-        <nav class="channels" aria-label="Temas">
-          <button type="button" class="new-channel-trigger" id="newChannelBtn" title="Nuevo tema" aria-label="Nuevo tema"><i class="channel-icon add-icon">+</i></button>
-          <span class="channel" data-channel="LinkedIn"><i class="channel-icon linkedin">in</i>LinkedIn</span>
-          <span class="channel" data-channel="WhatsApp"><i class="channel-icon whatsapp">◔</i>WhatsApp</span>
-          <span class="channel" data-channel="Instagram"><i class="channel-icon instagram">◎</i>Instagram</span>
-          <span class="channel" data-channel="TikTok"><i class="channel-icon tiktok">♪</i>TikTok</span>
-          <span class="channel" data-channel="X"><i class="channel-icon x">𝕏</i>X</span>
-          <span class="channel" data-channel="Email"><i class="channel-icon email">✉</i>Email</span>
-          <span class="channel" data-channel="Web"><i class="channel-icon web">⌘</i>Web</span>
-          <span class="channel" data-channel="Investigación"><i class="channel-icon research">⌕</i>Investigación</span>
-          <span class="channel" data-channel="Prospección"><i class="channel-icon prospeccion" style="background:#e53935">🎯</i>Prospección</span>
-          <span class="channel" data-channel="Ventas"><i class="channel-icon sales">↗</i>Ventas</span>
-          <span class="channel" data-channel="Yo"><i class="channel-icon neutral" style="background:#ff3560">✦</i>Yo</span>
-          <button type="button" class="del-channel-trigger" id="delChannelBtn" title="Eliminar tema" aria-label="Eliminar tema"><i class="channel-icon del-icon">−</i></button>
-        </nav>
+          <div class="hero-card-highlights">
+            <div class="card-highlight-box">
+              <span class="card-highlight-number" data-i18n="stat_1_num">100%</span>
+              <span class="card-highlight-label" data-i18n="stat_1_label">Asesoría Fiduciaria e Imparcial</span>
+            </div>
+            <div class="card-highlight-box">
+              <span class="card-highlight-number" data-i18n="stat_2_num">+15</span>
+              <span class="card-highlight-label" data-i18n="stat_2_label">Aseguradoras Reguladas</span>
+            </div>
+          </div>
+
+          <div class="hero-card-cta-box">
+            <p data-i18n="profile_box_text">¿Tienes dudas sobre una póliza o tuviste un siniestro?</p>
+            <button class="btn btn-secondary btn-sm" data-open-modal data-subject="Consulta Directa Jeanette" data-i18n="profile_box_btn" style="width: 100%;">
+              Hablar con Jeanette
+            </button>
+          </div>
+        </div>
+
       </div>
     </div>
+  </section>
 
-    <section class="canvas-intro"><p class="canvas-kicker">SEMANA 45 · 2026</p><h1>Un lienzo para <em>hacer que las cosas pasen.</em></h1><p id="projectStory">Prioridades, relaciones e ideas de NetThinking, reunidas en una sola vista.</p></section>
-    <aside class="maker-strip" aria-label="Herramientas para crear tareas">
-      <button class="maker-tool" data-piece="note"><b><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="14" y2="18"/></svg></b><span>Nota</span></button>
-      <button class="maker-tool" data-piece="task"><b><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="9" y1="4" x2="9" y2="20"/></svg></b><span>To-do</span></button>
-      <button class="maker-tool" data-piece="file"><b><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></b><span>Archivos</span></button>
-      <button class="maker-tool" data-piece="location"><b><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></b><span>Ubicación</span></button>
-      <button class="maker-tool" data-piece="link"><b><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></b><span>Link</span></button>
-      <button class="maker-tool" data-piece="image"><b><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></b><span>Imagen</span></button>
-      <button class="maker-tool" data-piece="video"><b><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 4 20 12 6 20 6 4"/></svg></b><span>Video</span></button>
-      <button class="maker-tool" data-piece="audio"><b><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></b><span>Voz</span></button>
-      <button class="maker-tool" data-piece="meeting"><b><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg></b><span>Reunión</span></button>
-      <button class="maker-tool" data-piece="idea"><b><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></b><span>Destacada</span></button>
-      <button class="maker-tool" data-piece="sticker"><b><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></b><span>Stickers</span></button>
-      <button class="maker-tool" id="btnToggleDrawTool" data-piece="draw" title="Dibujar / Trazo con Apple Pencil"><b><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></b><span>Trazo</span></button>
-      <div class="tool-separator"></div>
-      <button id="trash" class="trash-tool" aria-label="Arrastra una tarea aquí para eliminarla"><b><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></b><span>Basurero</span></button>
-    </aside>
-    <section id="board" class="week-board" aria-label="Agenda semanal"></section>
-
-    <section class="pipeline-section" aria-label="Flujo de Ideas, Conexiones y Acciones">
-      <div class="pipeline-header">
-        <div class="pipeline-title-wrap">
-          <span class="eyebrow">FLUJO</span>
-        </div>
-        <div class="pipeline-legend">
-          <span class="pipeline-legend-item"><i class="stage-ico idea"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg></i> Idea</span>
-          <span class="pipeline-legend-arrow">→</span>
-          <span class="pipeline-legend-item"><i class="stage-ico conexion"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg></i> Conexión</span>
-          <span class="pipeline-legend-arrow">→</span>
-          <span class="pipeline-legend-item"><i class="stage-ico accion"><svg class="target-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#111111" stroke-width="2.2"/><circle cx="12" cy="12" r="5" fill="none" stroke="#111111" stroke-width="2.2"/><circle cx="12" cy="12" r="1.8" fill="#111111"/></svg></i> Acción</span>
-        </div>
-      </div>
-
-      <div class="pipeline-board">
-        <div class="pipeline-col" data-stage="idea">
-          <div class="pipeline-col-head">
-            <h3><i class="stage-ico idea"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.1 1 1.8V17h6v-.5c0-.7.4-1.4 1-1.8A7 7 0 0 0 12 2z"/></svg></i></h3>
+  <!-- ======================================================================
+       EL MANIFIESTO: LA FRASE DE JEANETTE (Elegancia Editorial)
+       ====================================================================== -->
+  <section class="quote-banner-section">
+    <div class="container">
+      <div class="quote-banner-card">
+        <div class="quote-decor">“</div>
+        <div class="quote-content">
+          <span class="quote-tagline" data-i18n="quote_tagline">Filosofía Fiduciaria</span>
+          <blockquote class="quote-text" data-i18n="quote_text">
+            «¿Qué tanto estoy creciendo, pero qué tanto estoy contribuyendo?»
+          </blockquote>
+          <div class="quote-author" data-i18n="quote_author">
+            — <strong>Jeanette Salinas Ponce</strong> · Corredora Oficial de Seguros
           </div>
-          <div class="pipeline-dropzone" data-stage="idea" id="pipelineIdeas"></div>
-        </div>
-
-        <div class="pipeline-col" data-stage="conexion">
-          <div class="pipeline-col-head">
-            <h3><i class="stage-ico conexion"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg></i></h3>
-          </div>
-          <div class="pipeline-dropzone" data-stage="conexion" id="pipelineConexiones"></div>
-        </div>
-
-        <div class="pipeline-col" data-stage="accion">
-          <div class="pipeline-col-head">
-            <h3><i class="stage-ico accion"><svg class="target-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#111111" stroke-width="2.2"/><circle cx="12" cy="12" r="5" fill="none" stroke="#111111" stroke-width="2.2"/><circle cx="12" cy="12" r="1.8" fill="#111111"/></svg></i></h3>
-          </div>
-          <div class="pipeline-dropzone" data-stage="accion" id="pipelineAcciones"></div>
         </div>
       </div>
-    </section>
-
-    <canvas id="mindJeanetteDrawCanvas" aria-hidden="true"></canvas>
-    <div id="mindJeanetteDrawToolbar" class="draw-floating-toolbar" aria-hidden="true">
-      <div class="draw-mode-group" title="Modos de trazo">
-        <button type="button" class="draw-tool-btn micro-btn active" data-draw-mode="free" title="Trazo curvo libre">
-          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16c2-4 5-8 8-4s6 0 8-4"/></svg>
-        </button>
-        <button type="button" class="draw-tool-btn micro-btn" data-draw-mode="curve-arrow" title="Curva con flecha al final (→)">
-          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18c3-4 6-7 10-4s4 0 6-4"/><path d="M16 6h4v4"/></svg>
-        </button>
-        <button type="button" class="draw-tool-btn micro-btn" data-draw-mode="line" title="Línea recta limpia">
-          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="19" x2="19" y2="5"/></svg>
-        </button>
-        <button type="button" class="draw-tool-btn micro-btn" data-draw-mode="arrow-right" title="Línea con flecha a la derecha / final (→)">
-          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19 19 5"/><path d="M11 5h8v8"/></svg>
-        </button>
-        <button type="button" class="draw-tool-btn micro-btn" data-draw-mode="arrow-left" title="Línea con flecha a la izquierda / inicio (←)">
-          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5 5 19"/><path d="M13 19H5v-8"/></svg>
-        </button>
-        <button type="button" class="draw-tool-btn micro-btn" data-draw-mode="arrow-both" title="Línea con flechas en ambos extremos (↔)">
-          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5 5 19"/><path d="M19 12V5h-7"/><path d="M5 12v7h7"/></svg>
-        </button>
-        <button type="button" class="draw-tool-btn micro-btn" data-draw-mode="erase" title="Borrador de trazos">
-          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg>
-        </button>
-      </div>
-      <div class="draw-sep"></div>
-
-      <!-- Selector de grosor de trazo (ícono de 5 líneas horizontales) -->
-      <div class="draw-stroke-picker-wrap" style="position:relative">
-        <button type="button" class="draw-tool-btn micro-btn" id="btnDrawStrokeWidth" title="Grosor del trazo">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-linecap="round">
-            <line x1="3" y1="4" x2="21" y2="4" stroke-width="1"/>
-            <line x1="3" y1="8" x2="21" y2="8" stroke-width="1.8"/>
-            <line x1="3" y1="12" x2="21" y2="12" stroke-width="2.6"/>
-            <line x1="3" y1="16" x2="21" y2="16" stroke-width="3.6"/>
-            <line x1="3" y1="20" x2="21" y2="20" stroke-width="4.8"/>
-          </svg>
-        </button>
-        <div id="drawStrokeMenu" class="draw-stroke-menu">
-          <button type="button" class="draw-stroke-opt" data-width="1.0">
-            <span class="stroke-sample" style="height:1px"></span>
-            <span class="stroke-label">Fina</span>
-          </button>
-          <button type="button" class="draw-stroke-opt active" data-width="1.6">
-            <span class="stroke-sample" style="height:1.6px"></span>
-            <span class="stroke-label">Delgada</span>
-          </button>
-          <button type="button" class="draw-stroke-opt" data-width="2.6">
-            <span class="stroke-sample" style="height:2.6px"></span>
-            <span class="stroke-label">Media</span>
-          </button>
-          <button type="button" class="draw-stroke-opt" data-width="4.0">
-            <span class="stroke-sample" style="height:4px"></span>
-            <span class="stroke-label">Gruesa</span>
-          </button>
-          <button type="button" class="draw-stroke-opt" data-width="6.5">
-            <span class="stroke-sample" style="height:6.5px"></span>
-            <span class="stroke-label">Extra</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="draw-sep"></div>
-      <button type="button" class="draw-color-dot active" data-draw-color="#111111" style="background:#111111" title="Negro"></button>
-      <button type="button" class="draw-color-dot" data-draw-color="#2563eb" style="background:#2563eb" title="Azul"></button>
-      <button type="button" class="draw-color-dot" data-draw-color="#dc2626" style="background:#dc2626" title="Rojo"></button>
-      <button type="button" class="draw-color-dot" data-draw-color="#16a34a" style="background:#16a34a" title="Verde"></button>
-      <div class="draw-sep"></div>
-      <button type="button" class="draw-tool-btn" id="btnDrawUndo" title="Deshacer trazo (⌘Z)">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
-      </button>
-      <button type="button" class="draw-tool-btn" id="btnDrawRedo" title="Rehacer trazo (⇧⌘Z)">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"/></svg>
-      </button>
-      <button type="button" class="draw-tool-btn" id="btnDrawClear" title="Limpiar todos los trazos">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>
-      </button>
-      <div class="draw-sep"></div>
-      <button type="button" class="draw-tool-btn" id="btnDrawAddWhiteboard" title="Lienzo blanco (mapa mental) — Clic para abrir/enfocar (Shift+clic para añadir otro)" style="display:inline-flex;align-items:center;gap:5px;padding:0 8px;font-size:11px;font-weight:700">
-        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-        <span>Lienzo</span>
-      </button>
-      <div class="draw-sep"></div>
-      <button type="button" class="draw-exit-btn" id="btnExitDrawMode" title="Desactivar herramienta de trazo">Listo</button>
     </div>
-  </main>
+  </section>
 
-  <aside id="detailPanel" class="detail-panel" aria-hidden="true">
-    <div class="panel-header"><span class="eyebrow">DETALLE DE TAREA</span><button id="closePanel" aria-label="Cerrar detalle">×</button></div>
-    <div id="panelContent"></div>
-  </aside>
-  <div id="overlay" class="overlay"></div>
-  <dialog id="projectDialog" class="capture-dialog">
-    <form id="projectForm" method="dialog">
-      <div class="task-dialog-head">
-        <div>
-          <span class="eyebrow" style="display:block;font:700 10px 'DM Mono',monospace;color:#94a3b8;letter-spacing:0.5px;margin-bottom:2px">ORGANIZACIÓN</span>
-          <h2 style="margin:0;font-size:18px;font-weight:800;color:#1e293b;letter-spacing:-0.3px">Nuevo proyecto</h2>
-        </div>
-        <button id="closeProjectDialog" class="dialog-close" type="button" aria-label="Cerrar">×</button>
-      </div>
-      <label class="capture-field">Nombre del proyecto
-        <input id="projectName" placeholder="Ej. Estudio Creativo, Lanzamiento 2026…" required autocomplete="off">
-      </label>
-      <label class="capture-field">Propósito o descripción (opcional)
-        <input id="projectStoryInput" placeholder="Ej. Prioridades, objetivos y entregables clave…" autocomplete="off">
-      </label>
-      <div class="task-dialog-actions">
-        <button type="button" id="cancelProject">Cancelar</button>
-        <button type="submit" id="saveProject" value="default">Crear proyecto</button>
-      </div>
-    </form>
-  </dialog>
-  <dialog id="weekDialog" class="capture-dialog"><form id="weekForm" method="dialog"><div class="task-dialog-head"><div><span class="eyebrow">AGENDA</span><h2>Nueva semana</h2></div></div><label class="capture-field">Elige el primer día de la semana<input id="weekStart" type="date" required></label><p class="week-note">La semana se crea vacía. El demo permanece intacto del 19 al 25 de octubre.</p><div class="task-dialog-actions"><button type="button" id="cancelWeek">Cancelar</button><button value="default">Crear semana vacía</button></div></form></dialog>
-  <dialog id="newTaskDialog" class="task-dialog">
-    <form id="newTaskForm" method="dialog">
-      <div class="task-dialog-head"><div><h2>Nuevo Tema</h2></div><button class="dialog-close" value="cancel" aria-label="Cerrar">×</button></div>
-      <label class="task-field">Nombre <span id="taskCountLabel">0 / 60</span><input id="taskTitleInput" maxlength="60" autocomplete="off" placeholder="Ej. Comunidad, Eventos, Clientes…" required></label>
-      <div class="color-row"><label class="color-field">Color del icono <input id="taskFillInput" type="color" value="#0A66C2"></label></div>
-      <div class="icon-picker"><span>Icono</span><div id="iconGrid" class="icon-grid">
-        <button type="button" class="icon-choice selected" data-icon="✦" aria-label="Destacado">✦</button><button type="button" class="icon-choice" data-icon="in" aria-label="LinkedIn">in</button><button type="button" class="icon-choice" data-icon="◎" aria-label="Instagram">◎</button><button type="button" class="icon-choice" data-icon="◔" aria-label="WhatsApp">◔</button><button type="button" class="icon-choice" data-icon="♪" aria-label="TikTok">♪</button><button type="button" class="icon-choice" data-icon="𝕏" aria-label="X">𝕏</button><button type="button" class="icon-choice" data-icon="✉" aria-label="Email">✉</button><button type="button" class="icon-choice" data-icon="⌘" aria-label="Web">⌘</button><button type="button" class="icon-choice" data-icon="⌕" aria-label="Investigación">⌕</button><button type="button" class="icon-choice" data-icon="↗" aria-label="Ventas">↗</button><button type="button" class="icon-choice" data-icon="◷" aria-label="Reunión">◷</button><button type="button" class="icon-choice" data-icon="☼" aria-label="Idea">☼</button><button type="button" class="icon-choice" data-icon="◫" aria-label="Imagen">◫</button><button type="button" class="icon-choice" data-icon="⌁" aria-label="Archivo">⌁</button></div></div>
-      <div id="taskPreview" class="task-preview"><span id="previewIcon">✦</span><strong id="previewTitle">Tu nuevo tema</strong></div>
-      <div class="task-dialog-actions"><button type="button" id="cancelTask">Cancelar</button><button id="createTask" value="default">Crear tema</button></div>
-    </form>
-  </dialog>
-  <dialog id="captureDialog" class="capture-dialog">
-    <form id="captureForm" method="dialog">
-      <div class="task-dialog-head"><div><h2 id="captureTitle">Nota</h2></div><button id="closeCapture" class="dialog-close" type="button" aria-label="Cerrar">×</button></div>
-      <div id="captureBody"></div>
-      <div class="task-dialog-actions"><button type="button" id="cancelCapture">Cancelar</button><button value="default">Guardar nota</button></div>
-    </form>
-  </dialog>
-  <dialog id="todoTableDialog" class="capture-dialog">
-    <form id="todoTableForm" method="dialog">
-      <div class="task-dialog-head">
-        <div>
-          <span class="eyebrow" style="display:block;font:700 10px 'DM Mono',monospace;color:#94a3b8;letter-spacing:0.5px;margin-bottom:2px">MILANOTE TABLE</span>
-          <h2 style="margin:0;font-size:18px;font-weight:800;color:#1e293b;letter-spacing:-0.3px">Nueva Lista / Tabla To-do</h2>
-        </div>
-        <button id="closeTodoTable" class="dialog-close" type="button" aria-label="Cerrar">×</button>
+  <!-- ======================================================================
+       SELECTOR MODULAR DE SERVICIOS (Feather Tabs Architecture)
+       ====================================================================== -->
+  <section id="servicios" class="services-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" data-i18n="services_tag">Catálogo Modular</span>
+        <h2 class="section-title" data-i18n="services_title">Protección a tu medida, sin letra chica</h2>
+        <p class="section-desc" data-i18n="services_desc">
+          Selecciona tu perfil para conocer las coberturas principales. Si necesitas un ramo específico, yo lo gestiono de inmediato.
+        </p>
       </div>
 
-      <label class="capture-field" style="margin-bottom:10px">Título de la tabla
-        <input id="todoTitleInput" placeholder="Ej. Presupuesto, Checklist de proyecto, Potenciales…" value="" required autocomplete="off">
-      </label>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px">
-        <label class="capture-field" style="margin:0">Día
-          <select id="todoDaySelect" name="day" style="width:100%;padding:7px 8px;border:1px solid #d6dade;border-radius:6px;font-weight:700;font-size:12px;background:#fff;margin-top:3px">
-            <option value="Lunes" selected>Lunes</option>
-            <option value="Martes">Martes</option>
-            <option value="Miércoles">Miércoles</option>
-            <option value="Jueves">Jueves</option>
-            <option value="Viernes">Viernes</option>
-            <option value="Sábado">Sábado</option>
-            <option value="Domingo">Domingo</option>
-          </select>
-        </label>
-        <label class="capture-field" style="margin:0">Proyecto
-          <select id="todoProjectSelect" name="project" class="modal-project-select" style="width:100%;padding:7px 8px;border:1px solid #d6dade;border-radius:6px;font-weight:700;font-size:12px;background:#fff;margin-top:3px"></select>
-        </label>
-      </div>
-
-
-
-      <div class="capture-field" style="margin-bottom:10px">
-        <label style="display:block;margin-bottom:4px;font-weight:800;font-size:11px">Columnas de la tabla</label>
-        <div class="col-count-selector" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-          <button type="button" class="col-btn" data-cols="1" onclick="window.updateColCount(1)">1 Columna</button>
-          <button type="button" class="col-btn active" data-cols="2" onclick="window.updateColCount(2)">2 Columnas</button>
-          <button type="button" class="col-btn" data-cols="3" onclick="window.updateColCount(3)">3 Columnas</button>
+      <!-- Selector de 3 Pestañas Elegantes -->
+      <div class="tabs-container">
+        <div class="tabs-wrapper" role="tablist">
+          <button class="tab-btn active" data-target="personal" role="tab" aria-selected="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <span data-i18n="tab_personal">Personas y Familias</span>
+          </button>
+          <button class="tab-btn" data-target="business" role="tab" aria-selected="false">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            <span data-i18n="tab_business">Empresas y Pymes</span>
+          </button>
+          <button class="tab-btn" data-target="travelers" role="tab" aria-selected="false">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span data-i18n="tab_travelers">Viajeros & Tránsito Internacional</span>
+            <span class="tab-badge-intl">SOAPEX</span>
+          </button>
         </div>
       </div>
 
-      <div id="colHeadersContainer" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
-        <label class="capture-field" id="colHeader1Wrap" style="margin:0">Cabecera 1
-          <input id="colHeader1" value="Item" autocomplete="off">
-        </label>
-        <label class="capture-field" id="colHeader2Wrap" style="margin:0">Cabecera 2
-          <input id="colHeader2" value="Cost" autocomplete="off">
-        </label>
-        <label class="capture-field" id="colHeader3Wrap" style="margin:0;display:none">Cabecera 3
-          <input id="colHeader3" value="Estado" autocomplete="off">
-        </label>
+      <!-- GRUPO 1: PERSONAS Y FAMILIAS -->
+      <div id="group-personal" class="services-category-group cards-grid">
+        <!-- Salud Complementaria -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon emerald">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+              </div>
+              <span class="card-badge badge-featured">Alta Demanda</span>
+            </div>
+            <h3 class="card-title">Salud Complementaria</h3>
+            <p class="card-desc">Cobertura ambulatoria, hospitalaria y dental. Reembolsos en las mejores clínicas de Chile sin copagos imprevistos.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Reembolso de medicamentos y consultas</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Cobertura ante enfermedades de alto costo</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Seguro de Salud Complementaria">Consultar sobre Salud</button>
+          </div>
+        </div>
+
+        <!-- Vida & Protección Familiar -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon iris">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              </div>
+              <span class="card-badge">Patrimonial</span>
+            </div>
+            <h3 class="card-title">Vida & Respaldo Familiar</h3>
+            <p class="card-desc">Protege el futuro de tus hijos y seres queridos. Indemnizaciones libres de impuestos e inembargables ante imprevistos.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Cobertura de invalidez y fallecimiento</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Opciones con ahorro e inversión libre</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Seguro de Vida y Protección">Consultar sobre Vida</button>
+          </div>
+        </div>
+
+        <!-- Seguro Automotriz Voluntario -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+              </div>
+              <span class="card-badge">Deducible Inteligente</span>
+            </div>
+            <h3 class="card-title">Automotriz Integral</h3>
+            <p class="card-desc">Protección contra pérdida total, robo y daños a terceros con red de talleres oficiales y auto de reemplazo garantizado.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Asistencia en ruta 24/7 y grúa</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Gestión directa y defensa ante liquidadores</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Seguro Automotriz">Consultar sobre Auto</button>
+          </div>
+        </div>
+
+        <!-- Hogar & Desgravamen Hipotecario -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon emerald">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              </div>
+              <span class="card-badge badge-featured">Ahorro Bancario</span>
+            </div>
+            <h3 class="card-title">Hogar & Auditoría Bancaria</h3>
+            <p class="card-desc">Protege tu casa contra incendio y sismo. Desvinculamos el seguro de tu crédito hipotecario bancario ahorrando dinero real.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Eliminación de sobreprecio en bancos</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Cobertura completa de contenido y sismo</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Seguro Hogar y Desgravamen">Auditar mi Crédito</button>
+          </div>
+        </div>
       </div>
 
-      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
-        <label style="display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;cursor:pointer">
-          <input type="checkbox" id="todoTotalCheck" checked style="width:15px;height:15px;accent-color:#6178ec">
-          Calcular y mostrar fila de total al pie ($)
-        </label>
-        <label style="display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;cursor:pointer">
-          <input type="checkbox" id="todoSeedDataCheck" checked style="width:15px;height:15px;accent-color:#6178ec">
-          Prellenar con datos de ejemplo
-        </label>
+      <!-- GRUPO 2: EMPRESAS Y PYMES (Inicialmente oculto) -->
+      <div id="group-business" class="services-category-group cards-grid" style="display: none;">
+        <!-- Garantía y Caución -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon emerald">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              </div>
+              <span class="card-badge badge-featured">Mercado Público</span>
+            </div>
+            <h3 class="card-title">Garantía & Caución</h3>
+            <p class="card-desc">Pólizas electrónicas para licitaciones del Estado, Mercado Público, SERVIU y contratos privados sin inmovilizar capital bancario.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Seriedad de la oferta y fiel cumplimiento</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Emisión ágil en 24-48 horas</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Póliza de Garantía y Caución">Cotizar Garantía</button>
+          </div>
+        </div>
+
+        <!-- Responsabilidad Civil -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon iris">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <span class="card-badge">Blindaje Legal</span>
+            </div>
+            <h3 class="card-title">Responsabilidad Civil</h3>
+            <p class="card-desc">Protege el patrimonio de tu empresa frente a reclamos o demandas judiciales por daños a terceros en tus operaciones comerciales.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> RC Operacional, Patronal y de Productos</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Gastos de defensa legal incluidos</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Responsabilidad Civil Empresarial">Consultar RC Empresa</button>
+          </div>
+        </div>
+
+        <!-- Colectivos de Salud y Vida -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon emerald">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </div>
+              <span class="card-badge">Beneficio Tributario</span>
+            </div>
+            <h3 class="card-title">Seguros Colectivos para Equipos</h3>
+            <p class="card-desc">Planes de salud, vida y dental para colaboradores. Fomenta la retención de talento clave con un beneficio 100% deducible de impuestos.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Desde 5 colaboradores en adelante</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Portal de autoservicio y reembolsos</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Seguro Colectivo de Salud para Empresas">Cotizar para mi Equipo</button>
+          </div>
+        </div>
+
+        <!-- Flotas y Carga -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+              </div>
+              <span class="card-badge">Logística</span>
+            </div>
+            <h3 class="card-title">Flotas Comerciales & Carga</h3>
+            <p class="card-desc">Asegura camiones, furgones, maquinaria y mercancías en tránsito nacional e internacional contra pérdidas y accidentes.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Pólizas flotantes por viaje o anuales</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Asistencia especializada en carreteras</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Seguro de Flotas y Transporte">Cotizar Flotas</button>
+          </div>
+        </div>
       </div>
 
-      <div class="task-dialog-actions" style="margin-top:6px;padding-top:10px;border-top:1px solid #edf0f2">
-        <button type="button" id="cancelTodoTable">Cancelar</button>
-        <button type="submit" id="saveTodoTable" value="default" style="background:#6178ec;color:#fff;font-weight:800;padding:8px 20px;border-radius:6px;cursor:pointer">Crear tabla</button>
+      <!-- GRUPO 3: VIAJEROS & INTERNACIONAL (Inicialmente oculto) -->
+      <div id="group-travelers" class="services-category-group cards-grid" style="display: none;">
+        <!-- SOAPEX -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon emerald">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <span class="card-badge badge-urgent">Obligatorio Aduana</span>
+            </div>
+            <h3 class="card-title">SOAPEX (Ingreso a Chile)</h3>
+            <p class="card-desc">Seguro Obligatorio para vehículos motorizados con matrícula extranjera que ingresan a Chile (Argentina, Brasil, Perú, Bolivia, etc.).</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Autos, camionetas, motos y motorhomes</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Emisión digital express en PDF para aduana</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <a href="#viajeros" class="btn btn-primary">Emitir SOAPEX Express</a>
+          </div>
+        </div>
+
+        <!-- RCI Mercosur -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon iris">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              </div>
+              <span class="card-badge badge-urgent">Mercosur</span>
+            </div>
+            <h3 class="card-title">RCI Internacional (Salida a Mercosur)</h3>
+            <p class="card-desc">Responsabilidad Civil Internacional para vehículos con matrícula chilena que viajan a Argentina, Brasil, Uruguay, Paraguay y Bolivia.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Exigido por gendarmería y policía caminera</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Cobertura de daños a personas y bienes</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <a href="#viajeros" class="btn btn-secondary">Emitir RCI Mercosur</a>
+          </div>
+        </div>
+
+        <!-- Asistencia en Viaje Mundial -->
+        <div class="service-card">
+          <div class="card-top">
+            <div class="card-icon-row">
+              <div class="card-icon emerald">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+              </div>
+              <span class="card-badge badge-featured">Mundial 24/7</span>
+            </div>
+            <h3 class="card-title">Asistencia Médica en Viaje</h3>
+            <p class="card-desc">Cobertura médica internacional en USD o EUR para turistas, nómadas digitales y ejecutivos en cualquier continente del mundo.</p>
+            <ul class="card-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Cumple visados Schengen, EE.UU. y Asia</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Repatriación, equipaje y asistencia 24h</li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <button class="btn btn-secondary" data-open-modal data-subject="Asistencia en Viaje Internacional">Cotizar Asistencia</button>
+          </div>
+        </div>
       </div>
-    </form>
-  </dialog>
-  <dialog id="deleteChannelDialog" class="capture-dialog" style="max-width:440px">
-    <form id="deleteChannelForm" method="dialog">
-      <div class="task-dialog-head">
-        <div><h2>Eliminar Tema</h2></div>
-        <button id="closeDeleteChannel" class="dialog-close" type="button" aria-label="Cerrar">×</button>
-      </div>
 
-      <label class="capture-field">Selecciona el tema a eliminar
-        <select id="deleteChannelSelect" style="width:100%;padding:8px 10px;border:1px solid #d6dade;border-radius:6px;font-weight:700;font-size:13px;background:#fff;margin-top:6px"></select>
-      </label>
+    </div>
+  </section>
 
-      <div id="deleteChannelPreviewBadge" style="margin:10px 0 12px;padding:7px 10px;border-radius:5px;font-size:11px;font-weight:700;display:flex;align-items:center;gap:6px;background:#1674b8;color:#fff">
-        <span class="theme-dot" style="width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block"></span>
-        <span class="theme-label">LinkedIn</span>
-      </div>
-
-      <p style="font-size:11px;color:#78828e;margin:0 0 14px;line-height:1.4">El tema se quitará de la barra superior y de la lista de selección para crear notas y tareas.</p>
-
-      <div class="task-dialog-actions">
-        <button type="button" id="cancelDeleteChannel">Cancelar</button>
-        <button type="submit" value="default" style="background:#dc2626;color:#fff">Eliminar tema</button>
-      </div>
-    </form>
-  </dialog>
-
-  <dialog id="motivationDialog" class="capture-dialog" style="max-width:480px">
-    <form id="motivationForm" method="dialog">
-      <div class="task-dialog-head">
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="display:inline-flex;align-items:center;color:#111111"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+  <!-- ======================================================================
+       PUERTA INTERNACIONAL: COTIZADOR EXPRESS SOAPEX & RCI (QuePlan Agility)
+       ====================================================================== -->
+  <section id="viajeros" class="wizard-section">
+    <div class="container">
+      <div class="wizard-card">
+        
+        <!-- Sidebar Informativo de Aduana y Tránsito -->
+        <div class="wizard-sidebar">
           <div>
-            <h2 style="margin:0;font-size:17px;font-weight:800;color:#0f172a">Frase motivadora</h2>
-            <span style="font-size:11px;color:#64748b">Tu frase de la semana o frase de vida (máx. 2 líneas)</span>
+            <span class="section-tag" style="background: rgba(255,255,255,0.15); color: #FFFFFF;" data-i18n="wizard_badge">
+              Puerta de Entrada Internacional
+            </span>
+            <h3 data-i18n="wizard_title">Ingreso a Chile & Mercosur</h3>
+            <p data-i18n="wizard_desc">
+              Emisión ágil del seguro obligatorio SOAPEX para ingresar a Chile y cobertura RCI para transitar en países del Mercosur.
+            </p>
+
+            <ul class="wizard-bullet-list">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span data-i18n="wizard_b1">Obligatorio por ley para aduanas y pasos fronterizos.</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span data-i18n="wizard_b2">Válido para autos, camionetas, motos y casas rodantes.</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span data-i18n="wizard_b3">Emisión digital inmediata enviada a tu correo y WhatsApp.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div style="font-size: 0.8rem; color: #94A3B8; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px;">
+            Validado según exigencias del Ministerio de Transportes y Telecomunicaciones de Chile y normativa Mercosur.
           </div>
         </div>
-        <button id="closeMotivationDialog" class="dialog-close" type="button" aria-label="Cerrar">×</button>
-      </div>
 
-      <label class="capture-field" style="margin-top:10px">Escribe tu frase
-        <textarea id="motivationInput" name="motivation" maxlength="150" rows="3" placeholder="Ej. Haz que las cosas pasen. El foco vence al talento…" style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#000;line-height:1.4;padding:10px 12px;border:1px solid #cbd5e1;border-radius:8px;resize:none;width:100%;margin-top:6px;box-sizing:border-box" required></textarea>
-      </label>
+        <!-- Formulario Express Interactivo -->
+        <div class="wizard-body">
+          <h4 class="wizard-form-title" data-i18n="wizard_form_title">Cotizador Express SOAPEX & RCI</h4>
+          
+          <form id="express-wizard-form">
+            <div class="form-group">
+              <label class="form-label" for="wizard-type" data-i18n="wizard_label_type">¿Qué seguro necesitas?</label>
+              <select id="wizard-type" class="form-control" required>
+                <option value="SOAPEX (Ingreso a Chile)" data-i18n="wizard_opt_soapex">SOAPEX (Vehículo extranjero entrando a Chile)</option>
+                <option value="RCI Mercosur (Salida de Chile)" data-i18n="wizard_opt_rci">RCI Mercosur (Vehículo chileno saliendo a Argentina/Brasil)</option>
+                <option value="Asistencia en Viaje" data-i18n="wizard_opt_travel">Asistencia Médica en Viaje Internacional</option>
+              </select>
+            </div>
 
-      <div style="display:flex;justify-content:space-between;align-items:center;margin:4px 0 14px;font-size:11px;color:#94a3b8">
-        <span id="motivationCharCount">0 / 150 caracteres</span>
-        <span style="color:#64748b">Enter para guardar</span>
-      </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="wizard-vehicle" data-i18n="wizard_label_vehicle">Tipo de Vehículo</label>
+                <select id="wizard-vehicle" class="form-control" required>
+                  <option value="Automóvil / SUV">Automóvil / SUV</option>
+                  <option value="Camioneta / Pick-up">Camioneta / Pick-up</option>
+                  <option value="Motocicleta">Motocicleta</option>
+                  <option value="Casa Rodante / Motorhome">Casa Rodante / Motorhome</option>
+                  <option value="Camión / Transporte">Camión / Transporte</option>
+                </select>
+              </div>
 
-      <div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid #eef0f2">
-        <button type="button" id="btnDeleteMotivation" style="border:0;background:#fee2e2;color:#dc2626;padding:8px 14px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;display:none">Borrar frase</button>
-        <div style="display:flex;gap:8px;margin-left:auto">
-          <button type="button" id="cancelMotivation" style="border:1px solid #cbd5e1;background:#fff;color:#475569;padding:8px 14px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer">Cancelar</button>
-          <button type="submit" value="default" style="background:#0f172a;color:#fff;border:0;padding:8px 16px;border-radius:6px;font-weight:800;font-size:12px;cursor:pointer">Guardar frase</button>
+              <div class="form-group">
+                <label class="form-label" for="wizard-country" data-i18n="wizard_label_country">País de Origen / Matrícula</label>
+                <input type="text" id="wizard-country" class="form-control" placeholder="Ej: Argentina, Brasil, Perú..." required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="wizard-duration" data-i18n="wizard_label_duration">Tiempo de Estadía / Cobertura</label>
+              <select id="wizard-duration" class="form-control" required>
+                <option value="15 a 30 días">Hasta 30 días (Turismo standard)</option>
+                <option value="60 a 90 días">Hasta 90 días (Temporada / estadía larga)</option>
+                <option value="1 año (Anual)">Póliza Anual</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-accent" style="width: 100%; margin-top: 10px;" data-i18n="wizard_btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Solicitar Emisión con Jeanette
+            </button>
+          </form>
         </div>
-      </div>
-    </form>
-  </dialog>
 
-  <dialog id="stickerFolderDialog" class="capture-dialog sticker-folder-modal">
-    <div class="sticker-folder-header">
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="width:34px;height:34px;border-radius:10px;background:#fdf4ff;display:grid;place-items:center;color:#c026d3;font-size:18px">🌸</div>
-        <div>
-          <h2 style="margin:0;font-size:17px;font-weight:800;color:#0f172a;letter-spacing:-0.3px">Carpeta de Stickers</h2>
-          <span style="font-size:11px;color:#64748b">Haz clic en un sticker para colocarlo en el tablero</span>
-        </div>
       </div>
-      <button id="closeStickerFolder" class="dialog-close" type="button" aria-label="Cerrar">×</button>
     </div>
+  </section>
 
-    <div style="padding:16px 20px 20px;overflow-y:auto;max-height:calc(85vh - 72px)">
-      <!-- Zona para subir o arrastrar nuevos stickers -->
-      <div id="stickerDropArea" class="sticker-drop-area">
-        <input type="file" id="stickerFolderFileInput" accept="image/*" multiple style="display:none">
-        <div style="width:36px;height:36px;border-radius:50%;background:#fae8ff;color:#c026d3;display:grid;place-items:center;font-size:20px;font-weight:700">
-          +
-        </div>
-        <div>
-          <strong style="display:block;font-size:13px;color:#1e293b;margin-bottom:2px">Subir nuevos stickers</strong>
-          <span style="font-size:11px;color:#64748b">Elige archivos, arrástralos aquí o pega con <kbd style="background:#e2e8f0;padding:1px 5px;border-radius:4px;font-family:inherit;font-weight:700">Cmd + V</kbd></span>
-        </div>
+  <!-- ======================================================================
+       EL MÉTODO JEANETTE (4 PASOS)
+       ====================================================================== -->
+  <section id="metodo" class="method-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" data-i18n="method_tag">Metodología Fiduciaria</span>
+        <h2 class="section-title" data-i18n="method_title">Cómo te acompaño en 4 pasos</h2>
+        <p class="section-desc" data-i18n="method_desc">
+          Un proceso transparente, personal y humano frente a la burocracia bancaria.
+        </p>
       </div>
 
-      <!-- Barra de configuración de tamaño y conteo -->
-      <div style="display:flex;justify-content:space-between;align-items:center;margin:16px 0 10px;padding-bottom:8px;border-bottom:1px solid #f1f5f9">
-        <div style="display:flex;align-items:center;gap:8px">
-          <span id="stickerFolderCount" style="font-size:12px;font-weight:800;color:#334155">Mis Stickers (0)</span>
+      <div class="method-grid">
+        <div class="method-step">
+          <div class="step-number">01</div>
+          <h3 class="step-title" data-i18n="step1_title">01. Escucho tus necesidades</h3>
+          <p class="step-desc" data-i18n="step1_desc">
+            Conversamos brevemente para entender qué te preocupa proteger, tu presupuesto y necesidades reales.
+          </p>
         </div>
-        <div style="display:flex;align-items:center;gap:6px">
-          <label style="font-size:11px;font-weight:700;color:#64748b">Tamaño al colocar:</label>
-          <select id="stickerSpawnSize" style="font-size:11px;font-weight:700;padding:3px 8px;border:1px solid #cbd5e1;border-radius:6px;background:#fff;color:#1e293b">
-            <option value="120">Pequeño (120px)</option>
-            <option value="180" selected>Mediano (180px)</option>
-            <option value="260">Grande (260px)</option>
-            <option value="340">Extra grande (340px)</option>
-          </select>
+
+        <div class="method-step">
+          <div class="step-number">02</div>
+          <h3 class="step-title" data-i18n="step2_title">02. Comparo el mercado</h3>
+          <p class="step-desc" data-i18n="step2_desc">
+            Busco de forma 100% imparcial entre las más de 15 aseguradoras reguladas por la CMF en Chile.
+          </p>
+        </div>
+
+        <div class="method-step">
+          <div class="step-number">03</div>
+          <h3 class="step-title" data-i18n="step3_title">03. Te explico la letra chica</h3>
+          <p class="step-desc" data-i18n="step3_desc">
+            En lenguaje simple, sin tecnicismos opacos: sabrás exactamente qué te cubre y qué no ante cualquier evento.
+          </p>
+        </div>
+
+        <div class="method-step">
+          <div class="step-number">04</div>
+          <h3 class="step-title" data-i18n="step4_title">04. Yo gestiono por ti</h3>
+          <p class="step-desc" data-i18n="step4_desc">
+            Te acompaño durante la vigencia de la póliza y defiendo tus derechos técnicos ante la aseguradora en caso de siniestro.
+          </p>
         </div>
       </div>
-
-      <!-- Cuadrícula de stickers -->
-      <div id="stickerFolderGrid" class="sticker-folder-grid"></div>
     </div>
-  </dialog>
-  <script charset="UTF-8" src="app.js?v=12.6"></script>
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-    import { getFirestore, doc, getDoc, setDoc, collection, getDocs, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+  </section>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyDYKpnfMFzy6UpYhxn1eyPHHJjPSlsqvbI",
-      authDomain: "mindfer-agendacreativa.firebaseapp.com",
-      projectId: "mindfer-agendacreativa",
-      storageBucket: "mindfer-agendacreativa.firebasestorage.app",
-      messagingSenderId: "134918749532",
-      appId: "1:134918749532:web:64e2b7db86f91421e65599",
-      measurementId: "G-0WJ2ZCCN35"
-    };
+  <!-- ======================================================================
+       ALIANZAS COMERCIALES B2B
+       ====================================================================== -->
+  <section id="alianzas" class="alliances-section">
+    <div class="container">
+      <div class="alliances-banner">
+        <div>
+          <span class="section-tag" data-i18n="alliances_tag">Canal B2B</span>
+          <h2 class="section-title" data-i18n="alliances_title">Alianzas Comerciales & Convenios</h2>
+          <p class="section-desc" style="margin-bottom: 24px;" data-i18n="alliances_desc">
+            Generamos alianzas de valor con agencias de viaje, tour operadores, empresas de transporte y rent-a-car. Protege a tus clientes y pasajeros con condiciones preferentes y respaldo profesional continuo.
+          </p>
+          <button class="btn btn-primary" data-open-modal data-subject="Alianza Comercial B2B" data-i18n="alliances_btn">
+            Coordinar Reunión de Alianza
+          </button>
+        </div>
 
-    function compressDataUrlForCloud(dataUrlStr, maxDim = 1000, quality = 0.78) {
-      return new Promise(resolve => {
-        if (!dataUrlStr || dataUrlStr.length <= 650000 || !dataUrlStr.startsWith("data:image/")) {
-          return resolve(dataUrlStr || "");
-        }
-        const isPng = dataUrlStr.startsWith("data:image/png");
-        const img = new Image();
-        img.onerror = () => resolve(dataUrlStr.length <= 900000 ? dataUrlStr : "");
-        img.onload = () => {
-          let w = img.width, h = img.height;
-          if (w > maxDim || h > maxDim) {
-            const r = Math.min(maxDim / w, maxDim / h);
-            w = Math.round(w * r);
-            h = Math.round(h * r);
-          }
-          try {
-            const c = document.createElement("canvas");
-            c.width = w;
-            c.height = h;
-            const ctx = c.getContext("2d");
-            ctx.drawImage(img, 0, 0, w, h);
-            const mime = isPng ? "image/png" : "image/jpeg";
-            resolve(c.toDataURL(mime, quality));
-          } catch (_) {
-            resolve(dataUrlStr.length <= 900000 ? dataUrlStr : "");
-          }
-        };
-        img.src = dataUrlStr;
-      });
-    }
+        <div class="alliances-cards-mini">
+          <div class="alliance-item-box">
+            <h4>Agencias de Viaje</h4>
+            <p>Emisión express de asistencias y comisiones preferentes para tus paquetes.</p>
+          </div>
+          <div class="alliance-item-box">
+            <h4>Tour Operadores</h4>
+            <p>Cobertura internacional para grupos y turismo receptivo en Chile.</p>
+          </div>
+          <div class="alliance-item-box">
+            <h4>Empresas de Transporte</h4>
+            <p>Pólizas de carga, responsabilidad civil y flotas comerciales.</p>
+          </div>
+          <div class="alliance-item-box">
+            <h4>Rent-a-Car</h4>
+            <p>Convenios SOAPEX y RCI para conductores y turistas que cruzan fronteras.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    try {
-      const app = initializeApp(firebaseConfig);
-      const db = getFirestore(app);
-      const stateDocRef = doc(db, "mindjeanette_state", "main");
-      const mediaColRef = collection(db, "mindjeanette_media");
-      let cloudSyncTimer = null;
-      const syncedMediaSignatures = new Map();
+  <!-- ======================================================================
+       TABLA COMPARATIVA: JEANETTE VS BANCOS VS COMPARADORES MASIVOS
+       ====================================================================== -->
+  <section class="comparison-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Diferencia Fiduciaria</span>
+        <h2 class="section-title">¿Por qué trabajar con Jeanette?</h2>
+        <p class="section-desc">Comparativa transparente entre un broker fiduciario y los canales tradicionales en Chile.</p>
+      </div>
 
-      async function syncMediaToCloud() {
-        if (typeof window.getMindFerMediaAttachments !== "function") return;
-        const attachments = window.getMindFerMediaAttachments();
-        for (const item of attachments) {
-          const sig = `${(item.image || "").length}_${(item.fileData || "").length}_${(item.transcriptData || "").length}_${(item.media || "").length}_${(item.images || []).length}_${(item.files || []).length}`;
-          if (syncedMediaSignatures.get(item.id) === sig) continue;
-          try {
-            const safeImg = await compressDataUrlForCloud(item.image || "");
-            const docPayload = {
-              id: item.id,
-              updatedAt: Date.now()
-            };
-            if (safeImg && safeImg.length <= 900000) docPayload.image = safeImg;
-            if (Array.isArray(item.images) && item.images.length > 0) {
-              const safeImgs = [];
-              let currentBatchBytes = 0;
-              for(const imgStr of item.images){
-                const compressed = (typeof imgStr === 'string' && imgStr.length > 200000)
-                  ? await compressDataUrlForCloud(imgStr, 800, 0.72)
-                  : imgStr;
-                if(currentBatchBytes + (compressed || '').length < 850000){
-                  safeImgs.push(compressed);
-                  currentBatchBytes += (compressed || '').length;
-                }
-              }
-              docPayload.images = safeImgs;
-            }
-            if (Array.isArray(item.files) && item.files.length > 0) docPayload.files = item.files;
-            if (item.fileData && item.fileData.length <= 750000) docPayload.fileData = item.fileData;
-            if (item.transcriptData && item.transcriptData.length <= 750000) docPayload.transcriptData = item.transcriptData;
-            if (item.media && item.media.length <= 750000) docPayload.media = item.media;
-            await setDoc(doc(db, "mindjeanette_media", String(item.id)), docPayload, { merge: true });
-            syncedMediaSignatures.set(item.id, sig);
-          } catch (mErr) {
-            console.warn("Error subiendo adjunto a mindjeanette_media:", item.id, mErr?.message || mErr);
-          }
-        }
-      }
+      <div class="comparison-table-wrapper">
+        <div class="table-responsive">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Factor Clave</th>
+                <th class="col-jeanette">JSP Seguros · Jeanette</th>
+                <th>Bancos Tradicionales</th>
+                <th>Comparadores Web Masivos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Asesoría fiduciaria personalizada</strong></td>
+                <td class="col-jeanette"><span class="check-icon">✓ Sí, 100% dedicada</span></td>
+                <td><span class="cross-icon">✕ No (Venta de ventanilla)</span></td>
+                <td><span class="cross-icon">✕ No (Algoritmo automatizado)</span></td>
+              </tr>
+              <tr>
+                <td><strong>Defensa activa en caso de siniestro</strong></td>
+                <td class="col-jeanette"><span class="check-icon">✓ Sí, patrocinio técnico directo</span></td>
+                <td><span class="cross-icon">✕ No (Derivan a call-center)</span></td>
+                <td><span class="cross-icon">✕ No (Sin soporte presencial)</span></td>
+              </tr>
+              <tr>
+                <td><strong>Independencia real de aseguradoras</strong></td>
+                <td class="col-jeanette"><span class="check-icon">✓ Sí (+15 compañías)</span></td>
+                <td><span class="cross-icon">✕ No (Compañía filial cautiva)</span></td>
+                <td><span class="cross-icon">✕ Parcial (Privilegian comisiones)</span></td>
+              </tr>
+              <tr>
+                <td><strong>Emisión express SOAPEX & RCI</strong></td>
+                <td class="col-jeanette"><span class="check-icon">✓ Sí, digital e internacional</span></td>
+                <td><span class="cross-icon">✕ No disponible</span></td>
+                <td><span class="cross-icon">✕ Trámite lento o confuso</span></td>
+              </tr>
+              <tr>
+                <td><strong>Costo adicional sobre la póliza</strong></td>
+                <td class="col-jeanette"><span class="check-icon">✓ $0 (Sin costo para ti)</span></td>
+                <td><span class="cross-icon">✕ Con sobreprecio histórico FNE</span></td>
+                <td><span class="check-icon">✓ $0</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      async function pullMediaFromCloud() {
-        try {
-          const qSnap = await getDocs(mediaColRef);
-          const mediaMap = {};
-          qSnap.forEach(d => {
-            const data = d.data();
-            if (data) {
-              mediaMap[d.id] = data;
-              const sig = `${(data.image || "").length}_${(data.fileData || "").length}_${(data.transcriptData || "").length}_${(data.media || "").length}_${(data.images || []).length}_${(data.files || []).length}`;
-              syncedMediaSignatures.set(d.id, sig);
-            }
-          });
-          if (Object.keys(mediaMap).length > 0 && typeof window.applyMindFerMediaMap === "function") {
-            window.applyMindFerMediaMap(mediaMap);
-          }
-        } catch (err) {
-          console.warn("Error descargando mindjeanette_media:", err?.message || err);
-        }
-      }
+  <!-- ======================================================================
+       ASEGURADORAS REGULADAS (Alianzas de Mercado)
+       ====================================================================== -->
+  <section class="carriers-section">
+    <div class="container">
+      <div class="carriers-title" data-i18n="carriers_title">
+        Operamos de forma independiente con las principales aseguradoras reguladas por la CMF
+      </div>
+      <div class="carriers-grid">
+        <span class="carrier-pill">Bci Seguros</span>
+        <span class="carrier-pill">HDI Seguros</span>
+        <span class="carrier-pill">Mapfre</span>
+        <span class="carrier-pill">Zurich</span>
+        <span class="carrier-pill">Sura</span>
+        <span class="carrier-pill">Consorcio</span>
+        <span class="carrier-pill">MetLife</span>
+        <span class="carrier-pill">Chilena Consolidada</span>
+        <span class="carrier-pill">Reale Seguros</span>
+        <span class="carrier-pill">Liberty Seguros</span>
+        <span class="carrier-pill">Assist Card</span>
+      </div>
+    </div>
+  </section>
 
-      window.syncMindFerToCloud = async function() {
-        try {
-          if (typeof window.getMindFerCloudPayload !== "function") return;
-          const payload = window.getMindFerCloudPayload();
-          if (!payload) return;
-          await syncMediaToCloud();
-          await setDoc(stateDocRef, payload, { merge: true });
-          const hhmm = new Date(payload.savedAt || Date.now()).toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
-          if (typeof window.updateSaveStatusBadge === "function") {
-            window.updateSaveStatusBadge(`☁✓ Mac + Cloud ${hhmm}`, true);
-          }
-        } catch (err) {
-          console.warn("Firebase Cloud pendiente de sincronizar:", err?.message || err);
-          if (typeof window.updateSaveStatusBadge === "function") {
-            const nowHhmm = new Date().toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
-            window.updateSaveStatusBadge(`✓ Guardado local ${nowHhmm}`, true);
-          }
-        }
-      };
+  <!-- ======================================================================
+       FOOTER
+       ====================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>JSP Seguros</h4>
+          <p data-i18n="footer_desc">
+            Asesoría fiduciaria independiente en seguros generales, vida, salud y tránsito internacional. Comprometida con proteger tu patrimonio y acompañarte cuando más lo necesitas.
+          </p>
+        </div>
 
-      window.scheduleMindFerCloudSync = function() {
-        if (cloudSyncTimer) clearTimeout(cloudSyncTimer);
-        cloudSyncTimer = setTimeout(() => {
-          window.syncMindFerToCloud();
-        }, 450);
-      };
+        <div class="footer-col">
+          <h5>Para Familias</h5>
+          <ul class="footer-links">
+            <li><a href="#servicios" data-open-modal data-subject="Seguro de Salud">Salud Complementaria</a></li>
+            <li><a href="#servicios" data-open-modal data-subject="Seguro de Vida">Vida & Respaldo</a></li>
+            <li><a href="#servicios" data-open-modal data-subject="Seguro Automotriz">Automotriz Integral</a></li>
+            <li><a href="#servicios" data-open-modal data-subject="Seguro Hogar">Hogar & Sismo</a></li>
+          </ul>
+        </div>
 
-      // Sincronización inicial y escucha en tiempo real (Mac <-> iPad <-> iPhone)
-      setTimeout(async () => {
-        try {
-          await pullMediaFromCloud();
-          const snap = await getDoc(stateDocRef);
-          if (snap.exists()) {
-            const cloudData = snap.data();
-            if (typeof window.applyMindFerCloudPayloadIfNewer === "function") {
-              const applied = window.applyMindFerCloudPayloadIfNewer(cloudData, false);
-              if (applied) {
-                await pullMediaFromCloud();
-              }
-            }
-          }
+        <div class="footer-col">
+          <h5>Empresas & Viajeros</h5>
+          <ul class="footer-links">
+            <li><a href="#viajeros">SOAPEX para ingresar a Chile</a></li>
+            <li><a href="#viajeros">RCI Mercosur</a></li>
+            <li><a href="#servicios" data-open-modal data-subject="Garantía y Caución">Garantía & Licitaciones</a></li>
+            <li><a href="#alianzas">Alianzas Comerciales B2B</a></li>
+          </ul>
+        </div>
 
-          onSnapshot(stateDocRef, docSnap => {
-            if (!docSnap.exists() || docSnap.metadata.hasPendingWrites) return;
-            const liveData = docSnap.data();
-            const cloudSavedAt = Number(liveData?.savedAt || 0);
-            const localSavedAt = Number(localStorage.getItem('mindJeanetteLastSavedAt') || 0);
-            if (cloudSavedAt <= localSavedAt) return;
-            if (typeof window.applyMindFerCloudPayloadIfNewer === "function") {
-              const applied = window.applyMindFerCloudPayloadIfNewer(liveData, false);
-              if (applied) pullMediaFromCloud();
-            }
-          });
+        <div class="footer-col">
+          <h5>Contacto Oficial</h5>
+          <ul class="footer-links">
+            <li><a href="mailto:js0565330@gmail.com">js0565330@gmail.com</a></li>
+            <li><a href="#" id="footer-wa-link">Atención por WhatsApp</a></li>
+            <li><span>Santiago, Chile</span></li>
+            <li><a href="agenda.html" style="opacity: 0.5; font-size: 0.75rem;">Acceso Operativo Interno</a></li>
+          </ul>
+        </div>
+      </div>
 
-          onSnapshot(mediaColRef, colSnap => {
-            const mediaMap = {};
-            colSnap.forEach(d => {
-              if (!d.metadata.hasPendingWrites) {
-                mediaMap[d.id] = d.data();
-              }
-            });
-            if (Object.keys(mediaMap).length > 0 && typeof window.applyMindFerMediaMap === "function") {
-              window.applyMindFerMediaMap(mediaMap);
-            }
-          });
-        } catch (err) {
-          console.warn("Conexión inicial Firestore:", err?.message || err);
-        }
-      }, 600);
-    } catch (e) {
-      console.warn("No se pudo inicializar Firebase:", e);
-    }
-  </script>
-  <script>
-    (() => {
-      const dialog=document.querySelector('#newTaskDialog'), opener=document.querySelector('#newChannelBtn'), form=document.querySelector('#newTaskForm'), title=document.querySelector('#taskTitleInput'), fill=document.querySelector('#taskFillInput'), counter=document.querySelector('#taskCountLabel'), preview=document.querySelector('#taskPreview'), previewTitle=document.querySelector('#previewTitle'), previewIcon=document.querySelector('#previewIcon');
-      let chosenIcon='✦';
+      <div class="footer-bottom">
+        <div data-i18n="footer_rights">© 2026 JSP Seguros · Jeanette Salinas Ponce. Todos los derechos reservados.</div>
+        <div>Supervisada por la Comisión para el Mercado Financiero (CMF) de Chile.</div>
+      </div>
+    </div>
+  </footer>
 
-      // 1. Hide any channels saved as hidden
-      const hiddenChannels=JSON.parse(localStorage.getItem('mindJeanetteHiddenChannels')||'[]');
-      hiddenChannels.forEach(ch=>{
-        document.querySelectorAll(`.channels .channel[data-channel="${ch}"]`).forEach(el=>el.remove());
-      });
+  <!-- ======================================================================
+       BOTÓN FLOTANTE DE WHATSAPP INTELIGENTE (Contextual)
+       ====================================================================== -->
+  <a href="#" id="whatsapp-floating-btn" class="whatsapp-floating" aria-label="Hablar con Jeanette por WhatsApp">
+    <div class="whatsapp-tooltip" id="whatsapp-tooltip-text">Asesoría con Jeanette</div>
+    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+    <span>WhatsApp</span>
+  </a>
 
-      // 2. Load custom channels (skipping any hidden ones)
-      let savedChannels=JSON.parse(localStorage.getItem('mindJeanetteCustomChannels')||'[]');
-      savedChannels=savedChannels.filter(c=>!hiddenChannels.includes(c.name));
-      const oldTestTask=tasks.findIndex(task=>task.title==='Prueba'&&task.description==='Nueva tarea por definir');
-      if(oldTestTask>=0){
-        tasks.splice(oldTestTask,1);
-        save();
-        if(!savedChannels.some(channel=>channel.name==='Prueba')){
-          savedChannels.push({name:'Prueba',fill:'#0A66C2',icon:'✦'});
-          localStorage.setItem('mindJeanetteCustomChannels',JSON.stringify(savedChannels));
-        }
-      }
+  <!-- ======================================================================
+       MODAL DE ASESORÍA & CONTACTO
+       ====================================================================== -->
+  <div id="contact-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <button id="modal-close-btn" class="modal-close-btn" aria-label="Cerrar ventana">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
 
-      // appendChannel always inserts BEFORE the '-' button so '-' stays at the very end
-      const appendChannel=({name,fill:channelFill,icon})=>{
-        if(hiddenChannels.includes(name)) return;
-        const channel=document.createElement('span');
-        channel.className='channel custom-channel';
-        channel.dataset.channel=name;
-        channel.style.color='#737982';
-        channel.innerHTML=`<i class="channel-icon" style="background:${channelFill};color:#fff">${icon}</i>${name}`;
-        const delBtn=document.querySelector('#delChannelBtn');
-        if(delBtn) delBtn.before(channel);
-        else document.querySelector('.channels').append(channel);
-      };
-      savedChannels.forEach(appendChannel);
+      <h3 id="modal-title" style="margin-bottom: 8px; font-size: 1.35rem; color: var(--primary-navy);">
+        Solicitud de Asesoría Gratuita
+      </h3>
+      <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 20px;">
+        Déjame tus datos y te contactaré personalmente para evaluar tus coberturas sin costo ni compromiso.
+      </p>
 
-      const originalRender=render;
-      render=function(){
-        originalRender();
-        document.querySelectorAll('.color-custom').forEach(card=>{
-          const task=tasks.find(item=>item.id===Number(card.dataset.id));
-          if(!task)return;
-          card.style.background=task.fill;
-          card.style.color=task.textColor;
-          card.querySelectorAll('p,.tag,.status,.card-amount,h3').forEach(item=>{
-            item.style.color=task.textColor;
-            item.style.background='transparent';
-          });
-        });
-      };
+      <form id="consultation-form">
+        <input type="hidden" id="form-subject" value="General" />
 
-      opener.addEventListener('click', event => { event.stopImmediatePropagation(); dialog.showModal(); title.focus(); }, true);
-      document.querySelector('#cancelTask').addEventListener('click',()=>dialog.close());
-      dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
-      title.addEventListener('input',()=>{counter.textContent=`${title.value.length} / 60`;previewTitle.textContent=title.value||'Tu nuevo tema';});
-      fill.addEventListener('input',()=>{previewIcon.style.background=fill.value;});
-      document.querySelectorAll('.icon-choice').forEach(button=>button.addEventListener('click',()=>{
-        chosenIcon=button.dataset.icon;
-        document.querySelectorAll('.icon-choice').forEach(item=>item.classList.toggle('selected',item===button));
-        previewIcon.textContent=chosenIcon;
-      }));
-      form.addEventListener('submit', event => {
-        event.preventDefault();
-        const name=title.value.trim();
-        if(!name)return;
-        let hidden=JSON.parse(localStorage.getItem('mindJeanetteHiddenChannels')||'[]');
-        if(hidden.includes(name)){
-          hidden=hidden.filter(h=>h!==name);
-          localStorage.setItem('mindJeanetteHiddenChannels',JSON.stringify(hidden));
-        }
-        const channelData={name,fill:fill.value,icon:chosenIcon};
-        appendChannel(channelData);
-        let custom=JSON.parse(localStorage.getItem('mindJeanetteCustomChannels')||'[]');
-        custom=custom.filter(c=>c.name!==name);
-        custom.push(channelData);
-        localStorage.setItem('mindJeanetteCustomChannels',JSON.stringify(custom));
-        dialog.close();
-        title.value='';
-        counter.textContent='0 / 60';
-        previewTitle.textContent='Tu nuevo tema';
-        if(typeof render==='function') render();
-      });
+        <div class="form-group">
+          <label class="form-label" for="form-name">Nombre Completo *</label>
+          <input type="text" id="form-name" class="form-control" placeholder="Ej: Marcela González" required />
+        </div>
 
-      // 3. Delete channel logic
-      const delDialog=document.querySelector('#deleteChannelDialog');
-      const delOpener=document.querySelector('#delChannelBtn');
-      const delForm=document.querySelector('#deleteChannelForm');
-      const delSelect=document.querySelector('#deleteChannelSelect');
-      const delBadge=document.querySelector('#deleteChannelPreviewBadge');
-      const delClose=document.querySelector('#closeDeleteChannel');
-      const delCancel=document.querySelector('#cancelDeleteChannel');
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="form-phone">Teléfono / WhatsApp *</label>
+            <input type="tel" id="form-phone" class="form-control" placeholder="+56 9 ..." required />
+          </div>
 
-      function updateDeletePreview(){
-        if(!delSelect||!delBadge)return;
-        const val=delSelect.value;
-        if(!val){
-          delBadge.style.display='none';
-          return;
-        }
-        delBadge.style.display='flex';
-        const cInfo=(typeof getThemeColorInfo==='function')?getThemeColorInfo(val):{bg:'#6178ec',text:'#fff',label:val};
-        delBadge.style.background=cInfo.bg;
-        delBadge.style.color=cInfo.text;
-        const lbl=delBadge.querySelector('.theme-label');
-        if(lbl) lbl.textContent=val;
-      }
+          <div class="form-group">
+            <label class="form-label" for="form-email">Correo Electrónico *</label>
+            <input type="email" id="form-email" class="form-control" placeholder="correo@ejemplo.com" required />
+          </div>
+        </div>
 
-      if(delOpener&&delDialog){
-        delOpener.addEventListener('click', e => {
-          e.stopImmediatePropagation();
-          const visibleEls=document.querySelectorAll('.channels .channel');
-          delSelect.innerHTML='';
-          if(visibleEls.length===0){
-            delSelect.innerHTML='<option value="">(No hay temas para eliminar)</option>';
-          }else{
-            visibleEls.forEach(el=>{
-              const chName=el.dataset.channel||el.textContent.trim();
-              const opt=document.createElement('option');
-              opt.value=chName;
-              opt.textContent=chName;
-              delSelect.appendChild(opt);
-            });
-          }
-          updateDeletePreview();
-          delDialog.showModal();
-        }, true);
+        <div class="form-group">
+          <label class="form-label" for="form-notes">¿Qué necesitas proteger o qué dudas tienes?</label>
+          <textarea id="form-notes" class="form-control" rows="3" placeholder="Cuéntame brevemente tu caso o seguro de interés..."></textarea>
+        </div>
 
-        if(delSelect) delSelect.addEventListener('change', updateDeletePreview);
-        if(delClose) delClose.addEventListener('click', ()=>delDialog.close());
-        if(delCancel) delCancel.addEventListener('click', ()=>delDialog.close());
-        delDialog.addEventListener('click', e => { if (e.target===delDialog) delDialog.close(); });
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+          Enviar y Coordinar con Jeanette
+        </button>
+      </form>
+    </div>
+  </div>
 
-        if(delForm){
-          delForm.addEventListener('submit', e => {
-            e.preventDefault();
-            const targetChannel=delSelect.value;
-            if(!targetChannel){
-              delDialog.close();
-              return;
-            }
-            let custom=JSON.parse(localStorage.getItem('mindJeanetteCustomChannels')||'[]');
-            const isCustom=custom.some(c=>c.name===targetChannel);
-            if(isCustom){
-              custom=custom.filter(c=>c.name!==targetChannel);
-              localStorage.setItem('mindJeanetteCustomChannels',JSON.stringify(custom));
-            }else{
-              let hidden=JSON.parse(localStorage.getItem('mindJeanetteHiddenChannels')||'[]');
-              if(!hidden.includes(targetChannel)){
-                hidden.push(targetChannel);
-                localStorage.setItem('mindJeanetteHiddenChannels',JSON.stringify(hidden));
-              }
-            }
-            document.querySelectorAll(`.channels .channel[data-channel="${targetChannel}"]`).forEach(el=>el.remove());
-            delDialog.close();
-            if(typeof render==='function') render();
-          });
-        }
-      }
-    })();
-  </script>
-  <script>
-    const trashTool=document.querySelector('#trash');
-    const removeDraggedTask=()=>{if(!draggedId)return;if(typeof deleteTaskImmediately==='function'){const id=draggedId;draggedId=null;deleteTaskImmediately(id);return;}tasks=tasks.filter(task=>task.id!==draggedId);draggedId=null;save();render();};
-    ['dragenter','dragover'].forEach(type=>trashTool.addEventListener(type,event=>{event.preventDefault();trashTool.classList.add('drag-over');}));
-    trashTool.addEventListener('dragleave',()=>trashTool.classList.remove('drag-over'));
-    trashTool.addEventListener('drop',event=>{event.preventDefault();trashTool.classList.remove('drag-over');draggedId=draggedId||Number(event.dataTransfer.getData('text/plain'));removeDraggedTask();});
-  </script>
+  <!-- Script interactivo -->
+  <script src="jsp-app.js?v=1.0"></script>
 </body>
 </html>
