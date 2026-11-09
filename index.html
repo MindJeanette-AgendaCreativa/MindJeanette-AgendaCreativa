@@ -2463,13 +2463,13 @@
     import { getFirestore, doc, getDoc, setDoc, collection, getDocs, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyDYKpnfMFzy6UpYhxn1eyPHHJjPSlsqvbI",
-      authDomain: "mindfer-agendacreativa.firebaseapp.com",
-      projectId: "mindfer-agendacreativa",
-      storageBucket: "mindfer-agendacreativa.firebasestorage.app",
-      messagingSenderId: "134918749532",
-      appId: "1:134918749532:web:64e2b7db86f91421e65599",
-      measurementId: "G-0WJ2ZCCN35"
+      apiKey: "PENDING_JEANETTE_KEY",
+      authDomain: "mindjeanette-agendacreativa.firebaseapp.com",
+      projectId: "mindjeanette-agendacreativa",
+      storageBucket: "mindjeanette-agendacreativa.firebasestorage.app",
+      messagingSenderId: "",
+      appId: "",
+      measurementId: ""
     };
 
     function compressDataUrlForCloud(dataUrlStr, maxDim = 1000, quality = 0.78) {
@@ -2504,6 +2504,10 @@
     }
 
     try {
+      if (!firebaseConfig.apiKey || firebaseConfig.apiKey.startsWith("PENDING")) {
+        console.info("Firebase Cloud Sync en espera de llaves de MindJeanette-AgendaCreativa. Guardado local activo.");
+        return;
+      }
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
       const stateDocRef = doc(db, "mindjeanette_state", "main");
