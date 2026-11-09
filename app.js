@@ -172,7 +172,7 @@ function buildWeeksForCloudPayload(sourceWeeks){
 
 window.getMindFerCloudPayload = function(){
   try {
-    if(countRealBoardTasks(weeks) < 5) return null;
+    if(!hasUserSavedInSession && countRealBoardTasks(weeks) === 0) return null;
     let weeksJson = JSON.stringify(buildWeeksForCloudPayload(weeks));
     const drawMap = {};
     for(let i = 0; i < localStorage.length; i++){
@@ -230,11 +230,11 @@ window.applyMindFerCloudPayloadIfNewer = function(cloudData, allowLiveUpdate = f
     const cloudRealCount = countRealBoardTasks(parsedWeeks);
     const localRealCount = countRealBoardTasks(weeks);
 
-    // Nunca aceptar un estado vacío/parcial de la nube si localmente tenemos más datos reales
-    if(cloudRealCount < 6 && localRealCount >= 10) return false;
+    // Nunca aceptar un estado vacío de la nube si localmente tenemos tareas reales
+    if(cloudRealCount === 0 && localRealCount > 0) return false;
 
-    // Solo forzar restauración si el navegador local está completamente vacío (< 6 tareas) y la nube tiene datos reales
-    const forceRestoreFromCloud = !hasUserSavedInSession && (localRealCount < 6 && cloudRealCount >= 10);
+    // Forzar restauración si el navegador local está vacío y la nube tiene datos
+    const forceRestoreFromCloud = !hasUserSavedInSession && (localRealCount === 0 && cloudRealCount > 0);
 
     if(!forceRestoreFromCloud){
       const cloudSavedAt = Number(cloudData.savedAt || 0);

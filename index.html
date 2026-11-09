@@ -2458,6 +2458,191 @@
     </div>
   </dialog>
   <script charset="UTF-8" src="app.js?v=12.6"></script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getFirestore, doc, getDoc, setDoc, collection, getDocs, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDYKpnfMFzy6UpYhxn1eyPHHJjPSlsqvbI",
+      authDomain: "mindfer-agendacreativa.firebaseapp.com",
+      projectId: "mindfer-agendacreativa",
+      storageBucket: "mindfer-agendacreativa.firebasestorage.app",
+      messagingSenderId: "134918749532",
+      appId: "1:134918749532:web:64e2b7db86f91421e65599",
+      measurementId: "G-0WJ2ZCCN35"
+    };
+
+    function compressDataUrlForCloud(dataUrlStr, maxDim = 1000, quality = 0.78) {
+      return new Promise(resolve => {
+        if (!dataUrlStr || dataUrlStr.length <= 650000 || !dataUrlStr.startsWith("data:image/")) {
+          return resolve(dataUrlStr || "");
+        }
+        const isPng = dataUrlStr.startsWith("data:image/png");
+        const img = new Image();
+        img.onerror = () => resolve(dataUrlStr.length <= 900000 ? dataUrlStr : "");
+        img.onload = () => {
+          let w = img.width, h = img.height;
+          if (w > maxDim || h > maxDim) {
+            const r = Math.min(maxDim / w, maxDim / h);
+            w = Math.round(w * r);
+            h = Math.round(h * r);
+          }
+          try {
+            const c = document.createElement("canvas");
+            c.width = w;
+            c.height = h;
+            const ctx = c.getContext("2d");
+            ctx.drawImage(img, 0, 0, w, h);
+            const mime = isPng ? "image/png" : "image/jpeg";
+            resolve(c.toDataURL(mime, quality));
+          } catch (_) {
+            resolve(dataUrlStr.length <= 900000 ? dataUrlStr : "");
+          }
+        };
+        img.src = dataUrlStr;
+      });
+    }
+
+    try {
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const stateDocRef = doc(db, "mindjeanette_state", "main");
+      const mediaColRef = collection(db, "mindjeanette_media");
+      let cloudSyncTimer = null;
+      const syncedMediaSignatures = new Map();
+
+      async function syncMediaToCloud() {
+        if (typeof window.getMindFerMediaAttachments !== "function") return;
+        const attachments = window.getMindFerMediaAttachments();
+        for (const item of attachments) {
+          const sig = `${(item.image || "").length}_${(item.fileData || "").length}_${(item.transcriptData || "").length}_${(item.media || "").length}_${(item.images || []).length}_${(item.files || []).length}`;
+          if (syncedMediaSignatures.get(item.id) === sig) continue;
+          try {
+            const safeImg = await compressDataUrlForCloud(item.image || "");
+            const docPayload = {
+              id: item.id,
+              updatedAt: Date.now()
+            };
+            if (safeImg && safeImg.length <= 900000) docPayload.image = safeImg;
+            if (Array.isArray(item.images) && item.images.length > 0) {
+              const safeImgs = [];
+              let currentBatchBytes = 0;
+              for(const imgStr of item.images){
+                const compressed = (typeof imgStr === 'string' && imgStr.length > 200000)
+                  ? await compressDataUrlForCloud(imgStr, 800, 0.72)
+                  : imgStr;
+                if(currentBatchBytes + (compressed || '').length < 850000){
+                  safeImgs.push(compressed);
+                  currentBatchBytes += (compressed || '').length;
+                }
+              }
+              docPayload.images = safeImgs;
+            }
+            if (Array.isArray(item.files) && item.files.length > 0) docPayload.files = item.files;
+            if (item.fileData && item.fileData.length <= 750000) docPayload.fileData = item.fileData;
+            if (item.transcriptData && item.transcriptData.length <= 750000) docPayload.transcriptData = item.transcriptData;
+            if (item.media && item.media.length <= 750000) docPayload.media = item.media;
+            await setDoc(doc(db, "mindjeanette_media", String(item.id)), docPayload, { merge: true });
+            syncedMediaSignatures.set(item.id, sig);
+          } catch (mErr) {
+            console.warn("Error subiendo adjunto a mindjeanette_media:", item.id, mErr?.message || mErr);
+          }
+        }
+      }
+
+      async function pullMediaFromCloud() {
+        try {
+          const qSnap = await getDocs(mediaColRef);
+          const mediaMap = {};
+          qSnap.forEach(d => {
+            const data = d.data();
+            if (data) {
+              mediaMap[d.id] = data;
+              const sig = `${(data.image || "").length}_${(data.fileData || "").length}_${(data.transcriptData || "").length}_${(data.media || "").length}_${(data.images || []).length}_${(data.files || []).length}`;
+              syncedMediaSignatures.set(d.id, sig);
+            }
+          });
+          if (Object.keys(mediaMap).length > 0 && typeof window.applyMindFerMediaMap === "function") {
+            window.applyMindFerMediaMap(mediaMap);
+          }
+        } catch (err) {
+          console.warn("Error descargando mindjeanette_media:", err?.message || err);
+        }
+      }
+
+      window.syncMindFerToCloud = async function() {
+        try {
+          if (typeof window.getMindFerCloudPayload !== "function") return;
+          const payload = window.getMindFerCloudPayload();
+          if (!payload) return;
+          await syncMediaToCloud();
+          await setDoc(stateDocRef, payload, { merge: true });
+          const hhmm = new Date(payload.savedAt || Date.now()).toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
+          if (typeof window.updateSaveStatusBadge === "function") {
+            window.updateSaveStatusBadge(`☁✓ Mac + Cloud ${hhmm}`, true);
+          }
+        } catch (err) {
+          console.warn("Firebase Cloud pendiente de sincronizar:", err?.message || err);
+          if (typeof window.updateSaveStatusBadge === "function") {
+            const nowHhmm = new Date().toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
+            window.updateSaveStatusBadge(`✓ Guardado local ${nowHhmm}`, true);
+          }
+        }
+      };
+
+      window.scheduleMindFerCloudSync = function() {
+        if (cloudSyncTimer) clearTimeout(cloudSyncTimer);
+        cloudSyncTimer = setTimeout(() => {
+          window.syncMindFerToCloud();
+        }, 450);
+      };
+
+      // Sincronización inicial y escucha en tiempo real (Mac <-> iPad <-> iPhone)
+      setTimeout(async () => {
+        try {
+          await pullMediaFromCloud();
+          const snap = await getDoc(stateDocRef);
+          if (snap.exists()) {
+            const cloudData = snap.data();
+            if (typeof window.applyMindFerCloudPayloadIfNewer === "function") {
+              const applied = window.applyMindFerCloudPayloadIfNewer(cloudData, false);
+              if (applied) {
+                await pullMediaFromCloud();
+              }
+            }
+          }
+
+          onSnapshot(stateDocRef, docSnap => {
+            if (!docSnap.exists() || docSnap.metadata.hasPendingWrites) return;
+            const liveData = docSnap.data();
+            const cloudSavedAt = Number(liveData?.savedAt || 0);
+            const localSavedAt = Number(localStorage.getItem('mindJeanetteLastSavedAt') || 0);
+            if (cloudSavedAt <= localSavedAt) return;
+            if (typeof window.applyMindFerCloudPayloadIfNewer === "function") {
+              const applied = window.applyMindFerCloudPayloadIfNewer(liveData, false);
+              if (applied) pullMediaFromCloud();
+            }
+          });
+
+          onSnapshot(mediaColRef, colSnap => {
+            const mediaMap = {};
+            colSnap.forEach(d => {
+              if (!d.metadata.hasPendingWrites) {
+                mediaMap[d.id] = d.data();
+              }
+            });
+            if (Object.keys(mediaMap).length > 0 && typeof window.applyMindFerMediaMap === "function") {
+              window.applyMindFerMediaMap(mediaMap);
+            }
+          });
+        } catch (err) {
+          console.warn("Conexión inicial Firestore:", err?.message || err);
+        }
+      }, 600);
+    } catch (e) {
+      console.warn("No se pudo inicializar Firebase:", e);
+    }
+  </script>
   <script>
     (() => {
       const dialog=document.querySelector('#newTaskDialog'), opener=document.querySelector('#newChannelBtn'), form=document.querySelector('#newTaskForm'), title=document.querySelector('#taskTitleInput'), fill=document.querySelector('#taskFillInput'), counter=document.querySelector('#taskCountLabel'), preview=document.querySelector('#taskPreview'), previewTitle=document.querySelector('#previewTitle'), previewIcon=document.querySelector('#previewIcon');
