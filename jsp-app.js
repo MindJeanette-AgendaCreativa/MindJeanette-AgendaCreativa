@@ -285,9 +285,10 @@ function initWizard() {
    ========================================================================== */
 function initWhatsApp() {
   const floatingBtn = document.getElementById('whatsapp-floating-btn');
-  if (!floatingBtn) return;
+  const heroBtn = document.getElementById('hero-wa-btn');
+  const footerLink = document.getElementById('footer-wa-link');
 
-  floatingBtn.addEventListener('click', (e) => {
+  const handleWhatsAppClick = (e) => {
     e.preventDefault();
     let msg = "";
 
@@ -306,7 +307,11 @@ function initWhatsApp() {
     }
 
     sendWhatsAppMessage(msg);
-  });
+  };
+
+  if (floatingBtn) floatingBtn.addEventListener('click', handleWhatsAppClick);
+  if (heroBtn) heroBtn.addEventListener('click', handleWhatsAppClick);
+  if (footerLink) footerLink.addEventListener('click', handleWhatsAppClick);
 }
 
 function updateWhatsAppTooltip() {
